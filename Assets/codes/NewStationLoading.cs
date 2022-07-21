@@ -63,7 +63,7 @@ public class NewStationLoading : MonoBehaviour
                 StopCoroutine(uptadeMoney());
                 Debug.Log("0 oldu");
                 
-                openStation.active = true;
+                //openStation.active = true;
                 CloseCanvas.SetActive(false);
 
 

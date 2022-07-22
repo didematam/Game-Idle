@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Buttons : MonoBehaviour
 {
- 
+    public GameObject Upgrade;
     void Start()
     {
-        
+        Upgrade.SetActive(false);
     }
     public void exit()
     {
-       Application.Quit();
+
+        Upgrade.SetActive(false);
     }
  
     void Update()

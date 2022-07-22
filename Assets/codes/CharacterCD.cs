@@ -19,6 +19,7 @@ public class CharacterCD : MonoBehaviour
     [SerializeField] public float elapsed = 0f;
     public double currentMoney;
     public TextMeshProUGUI currentMoneyText;
+    bool isActive;
     void Start()
     {
         carryCD = new List<GameObject>();
@@ -104,12 +105,24 @@ public class CharacterCD : MonoBehaviour
             
            
         }
-        if(other.gameObject.tag=="Upgrade")
+        
+       
+
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Upgrade")
         {
-            Upgrade.SetActive(true);
+            if (!isActive)
+            {
+                Upgrade.SetActive(true);
+
+            }
+
+
+
         }
-
-
     }
 
 

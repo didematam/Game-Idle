@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class CharacterMove : MonoBehaviour
 {
     [SerializeField] VariableJoystick joystick;
     float speed = 10f;
     CharacterController characcontrol;
-    
+    public CharacterCD CharacterCD;
+   
+    public TextMeshProUGUI speedText;
 
     [SerializeField] Animator animator;
 
@@ -57,7 +59,7 @@ public class CharacterMove : MonoBehaviour
         }
        
 
-        if (GetComponent<CharacterCD>().carryCD.Count != 0 )
+        if (CharacterCD.carryCD.Count != 0 )
         {
 
 
@@ -69,8 +71,22 @@ public class CharacterMove : MonoBehaviour
         }
 
     }
+    public void upgradeSpeed()
+    {
+        if (CharacterCD.currentMoney >= CharacterCD.speedmoney)
+        {
+            CharacterCD.currentMoney -= CharacterCD.speedmoney;
+            CharacterCD.speedmoney *= 2;
+            var x = speed + 1f;
+            speed = x;
+           
+        }
+        speedText.text = CharacterCD.speedmoney.ToString();
 
-
-
+    }
 }
+
+
+
+
 

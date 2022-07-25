@@ -13,8 +13,12 @@ public class Station : MonoBehaviour
     public Money money;
     public CustomerSpawner customerSpawner;
     public Customers currentCustomer;
+    public Worker currentWorker;
     public CharacterCD character;
     public NewStationLoading newStationLoading;
+    public Buttons Buttons;
+    public WorkerSpawner WorkerSpawner;
+    public CharacterMove charactermove;
 
 
 

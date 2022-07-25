@@ -9,6 +9,9 @@ public class PutCD : MonoBehaviour
     public List<GameObject> putCD;
     public GameObject spawnObject;
     public GameObject spawnLocation;
+    public Transform WorkerPutCD;
+
+
 
     void Start()
     {

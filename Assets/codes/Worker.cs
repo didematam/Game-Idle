@@ -22,8 +22,10 @@ public class Worker : MonoBehaviour
     [SerializeField] public float timemax = 0.1f;
     [SerializeField] public float elapsed = 0f;
     [SerializeField] public int carrylimit=5;
-   
-    public int yenipara;
+    [SerializeField] public float speed = 0.1f;
+
+
+ 
 
     void Start()
     {
@@ -169,4 +171,17 @@ public class Worker : MonoBehaviour
         WorkerSpawner.CapacityText.text = WorkerSpawner.character.WorkerCapacityMoney.ToString();
 
     }
+    //public void upgradeSpeed()
+    //{
+    //    if (WorkerSpawner.character.currentMoney >= WorkerSpawner.character.WorkerSpeedMoney)
+    //    {
+    //        WorkerSpawner.character.currentMoney -= WorkerSpawner.character.WorkerSpeedMoney;
+    //        WorkerSpawner.character.WorkerSpeedMoney *= 2;
+    //        var x = carrylimit + 3;
+    //        carrylimit = (int)x;
+
+    //    }
+
+    //    WorkerSpawner.CapacityText.text = WorkerSpawner.character.WorkerSpeedMoney.ToString();
+    //}
 }

@@ -18,6 +18,7 @@ public class WorkerSpawner : MonoBehaviour
     public TextMeshProUGUI remainingWorker;
     public int Worker;
     public TextMeshProUGUI CapacityText;
+    public float speed = 0.1f;
 
 
 
@@ -36,7 +37,7 @@ public class WorkerSpawner : MonoBehaviour
            
             if (WorkerSpawns.Count <= 5)
             {
-                var x = Instantiate(WorkerSpawn, WorkerSpawnLocation.transform);
+                var x = Instantiate(WorkerSpawn, WorkerSpawnLocation.transform) ;
                 var worker = x.GetComponent<Worker>();
                 worker.collectCD = collectCDLocation;
                 worker.WorkerSpawner = this;

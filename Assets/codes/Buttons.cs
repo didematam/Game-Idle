@@ -14,6 +14,7 @@ public class Buttons : MonoBehaviour
     public Button speed;
     public Button workerspeed;
     public Button workerCapacity;
+    public Button pc;
 
 
     void Start()
@@ -61,6 +62,10 @@ public class Buttons : MonoBehaviour
             worker.upgradeCapacity();
         }
        
+    }
+    public void upgradepc()
+    {
+        stations.upgradestation();
     }
     //public void OnEnable()
     //{
@@ -136,6 +141,14 @@ public class Buttons : MonoBehaviour
         {
             workerspeed.interactable = true;
             workerCapacity.interactable = true;
+        }
+        if(stations.level2.active==true)
+        {
+            pc.interactable=false;
+        }
+        if (stations.level2.active == false)
+        {
+            pc.interactable = true;
         }
     }
 }

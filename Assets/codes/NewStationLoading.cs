@@ -15,9 +15,10 @@ public class NewStationLoading : MonoBehaviour
     public float paidMoney;
     public GameObject openStation;
     public GameObject CloseCanvas;
+  public AllStations allStations;
 
 
-   
+
     public TextMeshProUGUI moneyText;
  
 
@@ -62,8 +63,10 @@ public class NewStationLoading : MonoBehaviour
             {
                 StopCoroutine(uptadeMoney());
                 Debug.Log("0 oldu");
-                
+
+
                 //openStation.active = true;
+                allStations.GetLevel();
                 CloseCanvas.SetActive(false);
 
 

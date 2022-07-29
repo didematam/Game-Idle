@@ -20,16 +20,20 @@ public class Customers : MonoBehaviour
     public float maxProgressBar;
     public float minProgressBar;
     [SerializeField] private Image uiFill;
+    [SerializeField] private Image uiFillFood;
     public float speed = 0.01f;
     public GameObject ProgressBar;
+    public GameObject ProgressBarFoods;
     public GameObject HappyFace;
     public GameObject AngryFace;
     public GameObject Cola;
     public GameObject Hamburger;
     public int a;
+    public int x;
     bool isProgressBarStart;
+    bool isProgressBarFoodStart;
     IEnumerator progress;
-    
+    IEnumerator progressFood;
 
     bool isDestroy;
 
@@ -37,6 +41,7 @@ public class Customers : MonoBehaviour
     private void Awake()
     {
         ProgressBar.SetActive(false);
+        ProgressBarFoods.SetActive(false);
         HappyFace.SetActive(false);
         AngryFace.SetActive(false);
         Cola.SetActive(false);
@@ -65,7 +70,7 @@ public class Customers : MonoBehaviour
         while (currentStation.putcd.putCD.Count == 0)
         {
 
-            progress = progressBar(false);
+            progress = progressBar();
             StartCoroutine(progress);
 
 
@@ -90,27 +95,32 @@ public class Customers : MonoBehaviour
             if (a == 1)
             {
                 
-                var  x = customerspawner.food.GetRandomFood();
+                 x = customerspawner.food.GetRandomFood();
                 if (x == 0)
                 {
                     Hamburger.SetActive(true);
-
+                    Cola.SetActive(false);
                 }
                 else if (x == 1)
                 {
+                    Hamburger.SetActive(false);
                     Cola.SetActive(true);
-
-                }
-                StartCoroutine(progressBar(true));
-                while (customerspawner.putfood.putHamburger.Count == 0 || customerspawner.putfood.putCola.Count==0)
-                {
                     
+                }
+                progressFood = progressBarFood();
+                StartCoroutine(progressFood);
+
+
+                while (ProgressBarFoods.activeInHierarchy==true )
+                {
+                   
+                   
 
 
                     yield return null;
 
                 }
-                
+
             }
 
            
@@ -164,6 +174,7 @@ public class Customers : MonoBehaviour
                 
                
                 currentStation.Gladness.addgladness(5);
+              
 
                 currentStation.money.AddMoney((int)maxtime * 5);
 
@@ -203,7 +214,7 @@ public class Customers : MonoBehaviour
         }
     }
 
-   private IEnumerator progressBar(bool isFood)
+   private IEnumerator progressBar()
     {      
 
 
@@ -223,35 +234,18 @@ public class Customers : MonoBehaviour
                     uiFill.fillAmount = Mathf.InverseLerp(0, maxProgressBar, maxProgressBar - elapsed);
                     Debug.Log(maxProgressBar - elapsed);
 
-                if (!isFood && currentStation.putcd.putCD.Count > 0 )
+                if ( currentStation.putcd.putCD.Count > 0 )
                 {
                     StopCoroutine(progress);
                     ProgressBar.SetActive(false);
                     yield break;
                 }
-                if(isFood && ( customerspawner.putfood.putHamburger.Count > 0 || customerspawner.putfood.putCola.Count > 0))
-
-                {
-                    StopCoroutine(progress);
-                    ProgressBar.SetActive(false);
-                   
-                    yield break;
-                }
+                
                 
 
                 if (maxProgressBar - elapsed <= 0.33)
                     {
-                    if (!isFood )
-                    {
-                        currentStation.Gladness.RemoveGladness(5);
-                        currentStation.money.AddMoney((int)maxtime * 5);
-                    }
-                    if (isFood )
-
-                    {
-                        currentStation.Gladness.RemoveGladness(3);
-                    }
-                    //currentStation.Gladness.RemoveGladness(5);
+                    
                     AngryFace.SetActive(true);
                     animator.SetBool("sit", false);
                     
@@ -283,8 +277,76 @@ public class Customers : MonoBehaviour
            
         
     }
-    
-   
+    private IEnumerator progressBarFood()
+    {
+
+
+        if (!isProgressBarFoodStart)
+        {
+            isProgressBarFoodStart = true;
+            ProgressBarFoods.SetActive(true);
+
+
+            float elapsed = 0;
+
+
+            while (elapsed <= maxProgressBar)
+            {
+                elapsed += Time.deltaTime;
+
+                uiFillFood.fillAmount = Mathf.InverseLerp(0, maxProgressBar, maxProgressBar - elapsed);
+                Debug.Log(maxProgressBar - elapsed);
+
+                
+                if (customerspawner.putfood.putHamburger.Count > 0 || customerspawner.putfood.putCola.Count > 0)
+
+                {
+                    ProgressBarFoods.SetActive(false);
+                    StopCoroutine(progressFood);
+                    
+
+                    yield break;
+                }
+
+
+                if (maxProgressBar - elapsed <= 0.33)
+                {
+
+                    Cola.SetActive(false);
+                    Hamburger.SetActive(false);
+
+                    AngryFace.SetActive(true);
+
+                    ProgressBarFoods.SetActive(false);
+                    currentStation.Gladness.RemoveGladness(3);
+
+                    StopCoroutine(progressFood);
+                    yield break;
+                }
+
+                if (elapsed >= maxProgressBar)
+                {
+
+
+                    yield break;
+
+                }
+
+
+
+                yield return null;
+
+
+
+            }
+
+            yield return null;
+        }
+
+
+    }
+
+
     void Update()
     {
        
@@ -322,5 +384,6 @@ public class Customers : MonoBehaviour
         ProgressBar.transform.LookAt(Camera.main.transform.position);
         Hamburger.transform.LookAt(Camera.main.transform.position);
         Cola.transform.LookAt(Camera.main.transform.position);
+        ProgressBarFoods.transform.LookAt(Camera.main.transform.position);
     }
 }

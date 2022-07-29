@@ -36,8 +36,9 @@ public class Customers : MonoBehaviour
     IEnumerator progressFood;
 
     bool isDestroy;
+    //bool isStartForFood 
 
- 
+
     private void Awake()
     {
         ProgressBar.SetActive(false);
@@ -55,7 +56,7 @@ public class Customers : MonoBehaviour
     {
         
         agent.destination = currentStation.movePositionTransform.position;
-        maxtime = Random.Range(5, 20);
+        maxtime = Random.Range(7, 20);
         currenttime = maxtime;
      
 
@@ -83,54 +84,60 @@ public class Customers : MonoBehaviour
 
 
 
-        if (!customerspawner.canteen.opencanteen.activeInHierarchy )
-        {
-            yield return null;
-        }
-        else
-        {
 
-
-             a = Random.Range(1,1);
-            if (a == 1)
-            {
-                
-                 x = customerspawner.food.GetRandomFood();
-                if (x == 0)
-                {
-                    Hamburger.SetActive(true);
-                    Cola.SetActive(false);
-                }
-                else if (x == 1)
-                {
-                    Hamburger.SetActive(false);
-                    Cola.SetActive(true);
-                    
-                }
-                progressFood = progressBarFood();
-                StartCoroutine(progressFood);
-
-
-                while (ProgressBarFoods.activeInHierarchy==true )
-                {
-                   
-                   
-
-
-                    yield return null;
-
-                }
-
-            }
-
-           
-
-        }
-
+        var randomProgressFoodTime = Random.Range(5, currenttime);
+        bool isStartForFood = false;
 
         while (currenttime > 0)
         {
-           
+            if(currenttime<= randomProgressFoodTime && !isStartForFood )
+            {
+                isStartForFood=true;
+                if (!customerspawner.canteen.opencanteen.activeInHierarchy)
+                {
+                    yield return null;
+                }
+                else
+                {
+
+
+                    a = Random.Range(1, 1);
+                    if (a == 1)
+                    {
+
+                        x = customerspawner.food.GetRandomFood();
+                        if (x == 0)
+                        {
+                            Hamburger.SetActive(true);
+                            Cola.SetActive(false);
+                        }
+                        else if (x == 1)
+                        {
+                            Hamburger.SetActive(false);
+                            Cola.SetActive(true);
+
+                        }
+                        progressFood = progressBarFood();
+                        StartCoroutine(progressFood);
+
+
+                        while (ProgressBarFoods.activeInHierarchy == true)
+                        {
+
+
+
+
+                            yield return null;
+
+                        }
+
+                    }
+
+
+
+                }
+            }
+            
 
             currenttime -= Time.deltaTime;
 
@@ -158,17 +165,7 @@ public class Customers : MonoBehaviour
 
             if (currenttime <= 0)
             {
-                //if (Cola.activeInHierarchy || Hamburger.activeInHierarchy)
-                //{
-
-                //    currentStation.Gladness.RemoveGladness(3);
-                    
-                   
-                //}
-                //else
-                //{
-                //    HappyFace.SetActive(true);
-                //}
+                
                
 
                 
@@ -180,8 +177,7 @@ public class Customers : MonoBehaviour
 
                 
                 currentStation.currentCustomer = null;
-                //Cola.SetActive(false);
-                //Hamburger.SetActive(false);
+                
              
                 animator.SetBool("sit", false);
                 HappyFace.SetActive(true);

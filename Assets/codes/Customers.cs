@@ -65,7 +65,7 @@ public class Customers : MonoBehaviour
         while (currentStation.putcd.putCD.Count == 0)
         {
 
-            progress = progressBar();
+            progress = progressBar(false);
             StartCoroutine(progress);
 
 
@@ -78,7 +78,7 @@ public class Customers : MonoBehaviour
 
 
 
-        if (!customerspawner.canteen.opencanteen.activeInHierarchy)
+        if (!customerspawner.canteen.opencanteen.activeInHierarchy )
         {
             yield return null;
         }
@@ -86,28 +86,34 @@ public class Customers : MonoBehaviour
         {
 
 
-             a = Random.Range(0, 2);
+             a = Random.Range(1,1);
             if (a == 1)
             {
                 
                 var  x = customerspawner.food.GetRandomFood();
-
                 if (x == 0)
                 {
                     Hamburger.SetActive(true);
-                    //progress = progressBar();
-                    //StartCoroutine(progress);
+
                 }
                 else if (x == 1)
                 {
                     Cola.SetActive(true);
-                    //progress = progressBar();
-                    //StartCoroutine(progress);
-                }
 
+                }
+                StartCoroutine(progressBar(true));
+                while (customerspawner.putfood.putHamburger.Count == 0 || customerspawner.putfood.putCola.Count==0)
+                {
+                    
+
+
+                    yield return null;
+
+                }
+                
             }
 
-
+           
 
         }
 
@@ -142,17 +148,17 @@ public class Customers : MonoBehaviour
 
             if (currenttime <= 0)
             {
-                if (Cola.activeInHierarchy || Hamburger.activeInHierarchy)
-                {
+                //if (Cola.activeInHierarchy || Hamburger.activeInHierarchy)
+                //{
 
-                    currentStation.Gladness.RemoveGladness(3);
-                    AngryFace.SetActive(true);
+                //    currentStation.Gladness.RemoveGladness(3);
+                    
                    
-                }
-                else
-                {
-                    HappyFace.SetActive(true);
-                }
+                //}
+                //else
+                //{
+                //    HappyFace.SetActive(true);
+                //}
                
 
                 
@@ -163,11 +169,11 @@ public class Customers : MonoBehaviour
 
                 
                 currentStation.currentCustomer = null;
-                Cola.SetActive(false);
-                Hamburger.SetActive(false);
+                //Cola.SetActive(false);
+                //Hamburger.SetActive(false);
              
                 animator.SetBool("sit", false);
-
+                HappyFace.SetActive(true);
                 agent.destination = currentStation.exit.position;
                 isDestroy = true;
 
@@ -197,7 +203,7 @@ public class Customers : MonoBehaviour
         }
     }
 
-   private IEnumerator progressBar()
+   private IEnumerator progressBar(bool isFood)
     {      
 
 
@@ -217,24 +223,35 @@ public class Customers : MonoBehaviour
                     uiFill.fillAmount = Mathf.InverseLerp(0, maxProgressBar, maxProgressBar - elapsed);
                     Debug.Log(maxProgressBar - elapsed);
 
-                if (currentStation.putcd.putCD.Count > 0)
+                if (!isFood && currentStation.putcd.putCD.Count > 0 )
                 {
                     StopCoroutine(progress);
                     ProgressBar.SetActive(false);
                     yield break;
                 }
+                if(isFood && ( customerspawner.putfood.putHamburger.Count > 0 || customerspawner.putfood.putCola.Count > 0))
 
-                if (customerspawner.putfood.putHamburger.Count > 0 || customerspawner.putfood.putCola.Count>0)
                 {
                     StopCoroutine(progress);
                     ProgressBar.SetActive(false);
+                   
                     yield break;
                 }
+                
 
                 if (maxProgressBar - elapsed <= 0.33)
                     {
+                    if (!isFood )
+                    {
+                        currentStation.Gladness.RemoveGladness(5);
+                        currentStation.money.AddMoney((int)maxtime * 5);
+                    }
+                    if (isFood )
 
-                    currentStation.Gladness.RemoveGladness(5);
+                    {
+                        currentStation.Gladness.RemoveGladness(3);
+                    }
+                    //currentStation.Gladness.RemoveGladness(5);
                     AngryFace.SetActive(true);
                     animator.SetBool("sit", false);
                     

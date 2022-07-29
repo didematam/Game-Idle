@@ -8,6 +8,7 @@ public class CharacterMove : MonoBehaviour
     float speed = 10f;
     CharacterController characcontrol;
     public CharacterCD CharacterCD;
+    public Rigidbody Rigidbody;
    
     public TextMeshProUGUI speedText;
 
@@ -17,8 +18,9 @@ public class CharacterMove : MonoBehaviour
     void Start()
     {
         characcontrol=GetComponent<CharacterController>();
+        Rigidbody=GetComponent<Rigidbody>();
 
-      
+
     }
 
 
@@ -50,23 +52,26 @@ public class CharacterMove : MonoBehaviour
 
         if (x != 0 || y != 0)
         {
+            Rigidbody.isKinematic = false;
             animator.SetBool("running", true);
 
         }
         else
         {
+            Rigidbody.isKinematic = true;
             animator.SetBool("running", false);
         }
        
 
         if (CharacterCD.carryCD.Count != 0 || CharacterCD.carryHamburger.Count != 0 || CharacterCD.carryCola.Count!=0 )
         {
-
+           
 
             animator.SetBool("carry", true);
         }
         else
         {
+
             animator.SetBool("carry", false);
         }
 

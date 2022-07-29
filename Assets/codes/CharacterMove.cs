@@ -59,7 +59,7 @@ public class CharacterMove : MonoBehaviour
         }
        
 
-        if (CharacterCD.carryCD.Count != 0 )
+        if (CharacterCD.carryCD.Count != 0 || CharacterCD.carryHamburger.Count != 0 || CharacterCD.carryCola.Count!=0 )
         {
 
 

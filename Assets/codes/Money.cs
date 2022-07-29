@@ -16,7 +16,7 @@ public class Money : MonoBehaviour
     public Transform Location;
     public Transform Moneys;
     public Transform startpos;
-
+    
     public int numberofrows;
     public int numberofcolumns;
     public float spacing;

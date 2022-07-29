@@ -7,8 +7,12 @@ public class CustomerSpawner : MonoBehaviour
 {
     public List<GameObject> CustomerSpawns;
     public List<Station> Stations;
+    public List<Food> foods;
     public GameObject CustomerSpawn;
     public GameObject CustomerSpawnLocation;
+    public canteen canteen;
+    public Food food;
+    public PutFood putfood;
     void Start()
     {
 

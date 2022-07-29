@@ -12,6 +12,11 @@ TagManager:
   - NewStation
   - Station
   - Upgrade
+  - OpenCanteen
+  - canteen
+  - hamburger
+  - cola
+  - PutFoodLocation
   layers:
   - Default
   - TransparentFX

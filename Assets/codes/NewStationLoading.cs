@@ -36,7 +36,7 @@ public class NewStationLoading : MonoBehaviour
     {
         var x = CharacterCD.GetComponent<CharacterCD>();
 
-        while (totalMoney >= 0)
+        if (totalMoney >= 0)
         {
            
             if (x.currentMoney <= 0)

@@ -10,18 +10,24 @@ public class CharacterCD : MonoBehaviour
 {
 
     public List<GameObject> carryCD;
-    [SerializeField] public GameObject NewStationLoading;
+    public List<GameObject> carryHamburger;
+    public List<GameObject> carryCola;
     [SerializeField] public GameObject sObject;
     [SerializeField] public GameObject sLocation;
     [SerializeField] public GameObject spawnObject;
     [SerializeField] public GameObject spawnLocation;
+    [SerializeField] public GameObject hamburgerObject;
+    [SerializeField] public GameObject hamburgerLocation;
+    [SerializeField] public GameObject colaObject;
+    [SerializeField] public GameObject colaLocation;
     [SerializeField] public GameObject Upgrade;
     [SerializeField] public float timemax = 0.1f;
     [SerializeField] public float elapsed = 0f;
     [SerializeField] public float moneyElapsed = 0f;
-    [SerializeField] public float moneytimemax = 0.2f;
+    [SerializeField] public float moneytimemax = 1f;
     [SerializeField] public int CDlimit = 5;
-    
+    [SerializeField] public int foodlimit = 1;
+
     public int capasitymoney = 100;
     public int speedmoney = 100;
     public int WorkerSpeedMoney = 100;
@@ -33,7 +39,8 @@ public class CharacterCD : MonoBehaviour
     void Start()
     {
         carryCD = new List<GameObject>();
-
+        carryHamburger = new List<GameObject>();
+        carryCola = new List<GameObject>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -77,6 +84,35 @@ public class CharacterCD : MonoBehaviour
             }
 
         }
+        if (other.gameObject.tag == "PutFoodLocation")
+        {
+            elapsed += Time.deltaTime;
+            if (elapsed >= timemax)
+            {
+
+                var putFood = other.GetComponent<PutFood>();
+
+                if (putFood.putCola.Count != foodlimit && carryCola.Count > 0 ||  putFood.putHamburger.Count != foodlimit && carryHamburger.Count>0) 
+                {
+
+                   
+                    if(carryCola.Count>0)
+                    {
+                        putFood.AddPutCola();
+                        RemoveCarryCola();
+                    }
+                    else if(carryHamburger.Count>0)
+                    {
+                        putFood.AddPutHamburger();
+                        RemoveCarryHamburger();
+                    }
+                   
+                }
+
+                elapsed = 0;
+            }
+
+        }
         if (other.gameObject.tag == "Money")
         {
             elapsed += Time.deltaTime;
@@ -106,7 +142,7 @@ public class CharacterCD : MonoBehaviour
             if (moneyElapsed >= moneytimemax)
             {
 
-            
+
                 if (currentMoney >= 0)
             {
 
@@ -117,12 +153,73 @@ public class CharacterCD : MonoBehaviour
                     moneyElapsed = 0;
 
                 }
-               
+
             }
 
         }
 
+        if (other.gameObject.tag == "OpenCanteen")
+        {
+                moneyElapsed += Time.deltaTime;
+                if (moneyElapsed >= moneytimemax)
+                {
 
+
+                    if (currentMoney >= 0)
+                {
+                
+                    other.GetComponent<canteen>().openCanteen();
+
+                    currentMoneyText.text = currentMoney.ToString();
+
+                        moneyElapsed = 0;
+
+                    }
+
+                }
+
+        }
+
+        if (other.gameObject.tag == "hamburger")
+        {
+            elapsed += Time.deltaTime;
+            if (elapsed >= timemax)
+            {
+
+                
+
+                if (carryHamburger.Count != foodlimit)
+                {
+
+                     AddCarryHamburger();
+                }
+
+                elapsed = 0;               
+                    
+
+                }
+            
+        }
+        if (other.gameObject.tag == "cola")
+        {
+            elapsed += Time.deltaTime;
+            if (elapsed >= timemax)
+            {
+
+                
+
+                if (carryCola.Count != foodlimit)
+                {
+
+                    AddCarryCola();
+                }
+
+                elapsed = 0;
+
+
+            }
+
+        }
 
 
     }
@@ -154,6 +251,36 @@ public class CharacterCD : MonoBehaviour
             var removedCD = carryCD.Last();
             carryCD.Remove(removedCD);
             Destroy(removedCD);
+        }
+
+    }
+    public void AddCarryHamburger()
+    {
+        var carryHamburgers = Instantiate(hamburgerObject, hamburgerLocation.gameObject.transform);
+        carryHamburger.Add(carryHamburgers);
+    }
+    public void RemoveCarryHamburger()
+    {
+        if (carryHamburger.Count > 0)
+        {
+            var removedHamburger = carryHamburger.Last();
+            carryHamburger.Remove(removedHamburger);
+            Destroy(removedHamburger);
+        }
+
+    }
+    public void AddCarryCola()
+    {
+        var carryColas = Instantiate(colaObject,colaLocation.gameObject.transform);
+        carryCola.Add(carryColas);
+    }
+    public void RemoveCarryCola()
+    {
+        if (carryCola.Count > 0)
+        {
+            var removedCola = carryCola.Last();
+            carryCola.Remove(removedCola);
+            Destroy(removedCola);
         }
 
     }

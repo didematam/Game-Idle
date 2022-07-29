@@ -8,12 +8,13 @@ using UnityEngine.UI;
 public class Customers : MonoBehaviour
 {
 
-    
+    public canteen canteen;
     public Station currentStation;
     public  NavMeshAgent agent;
     public Animator animator;
     public CustomerSpawner customerspawner;
     public float maxtime ;
+    public float foodtime;
     public float currenttime;
     public float currentProgressBar;
     public float maxProgressBar;
@@ -23,6 +24,9 @@ public class Customers : MonoBehaviour
     public GameObject ProgressBar;
     public GameObject HappyFace;
     public GameObject AngryFace;
+    public GameObject Cola;
+    public GameObject Hamburger;
+    public int a;
     bool isProgressBarStart;
     IEnumerator progress;
     
@@ -35,6 +39,8 @@ public class Customers : MonoBehaviour
         ProgressBar.SetActive(false);
         HappyFace.SetActive(false);
         AngryFace.SetActive(false);
+        Cola.SetActive(false);
+        Hamburger.SetActive(false);
         agent =GetComponent<NavMeshAgent>();
        
 
@@ -46,7 +52,8 @@ public class Customers : MonoBehaviour
         agent.destination = currentStation.movePositionTransform.position;
         maxtime = Random.Range(5, 20);
         currenttime = maxtime;
-       
+     
+
 
 
 
@@ -55,49 +62,121 @@ public class Customers : MonoBehaviour
 
     {
 
-        while(currentStation.putcd.putCD.Count == 0)
+        while (currentStation.putcd.putCD.Count == 0)
         {
-                             
+
             progress = progressBar();
             StartCoroutine(progress);
 
-           
+
             yield return null;
 
-        }       
+        }
 
 
         currentStation.putcd.RemovePutCD();
-        
 
-        while (currenttime > 0)
+
+
+        if (!customerspawner.canteen.opencanteen.activeInHierarchy)
+        {
+            yield return null;
+        }
+        else
+        {
+
+
+             a = Random.Range(0, 2);
+            if (a == 1)
             {
-           
+               var  x = customerspawner.food.GetRandomFood();
 
-            currenttime -= Time.deltaTime;
-
-
-
-                if (currenttime <= 0)
+                if (x == 0)
                 {
-                currentStation.Gladness.addgladness(5);
-                currentStation.money.AddMoney((int)maxtime * 5);
-                currentStation.currentCustomer = null;
-                HappyFace.SetActive(true);
-                    animator.SetBool("sit", false);
-                
-                agent.destination = currentStation.exit.position;
-                    isDestroy = true;
+                    Hamburger.SetActive(true);
 
+                }
+                else if (x == 1)
+                {
+                    Cola.SetActive(true);
 
                 }
 
-                yield return null;
+            }
 
+
+
+        }
+
+
+        while (currenttime > 0)
+        {
+
+
+
+            currenttime -= Time.deltaTime;
+
+            if (customerspawner.putfood.putHamburger.Count != 0 && a==1)
+            {
+                customerspawner.putfood.RemovePutHamburger();
+                Hamburger.SetActive(false);
+                currentStation.Gladness.addgladness(3);
+                currentStation.money.AddMoney(50);
+            }
            
+
+            if (customerspawner.putfood.putCola.Count != 0 && a == 1)
+            {
+                customerspawner.putfood.RemovePutCola();
+                Cola.SetActive(false);
+                currentStation.Gladness.addgladness(3);
+                currentStation.money.AddMoney(50);
+            }
+           
+
+
+
+
+            if (currenttime <= 0)
+            {
+                if (Cola.activeInHierarchy)
+                {
+
+                    currentStation.Gladness.RemoveGladness(3);
+                   
+                }
+               
+
+                if (Hamburger.activeInHierarchy)
+                {
+
+                    currentStation.Gladness.RemoveGladness(3);
+                   
+                }
+               
+                currentStation.Gladness.addgladness(5);
+
+                currentStation.money.AddMoney((int)maxtime * 5);
+
+                
+                currentStation.currentCustomer = null;
+                Cola.SetActive(false);
+                Hamburger.SetActive(false);
+                HappyFace.SetActive(true);
+                animator.SetBool("sit", false);
+
+                agent.destination = currentStation.exit.position;
+                isDestroy = true;
+
+
+            }
+
+            yield return null;
+
+            //}
         }
     }
-
+    
 
 
     private void OnTriggerEnter(Collider other)
@@ -178,10 +257,7 @@ public class Customers : MonoBehaviour
         
     }
     
-    //public void StopCoroutine()
-    //{
-    //    StopCoroutine(progressBar());
-    //}
+   
     void Update()
     {
        
@@ -217,5 +293,7 @@ public class Customers : MonoBehaviour
         AngryFace.transform.LookAt(Camera.main.transform.position);
         HappyFace.transform.LookAt(Camera.main.transform.position);
         ProgressBar.transform.LookAt(Camera.main.transform.position);
+        Hamburger.transform.LookAt(Camera.main.transform.position);
+        Cola.transform.LookAt(Camera.main.transform.position);
     }
 }

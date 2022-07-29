@@ -11,6 +11,7 @@ public class Station : MonoBehaviour
     public Transform exit;
     public Transform Monitor;
     public PutCD putcd;
+    public PutFood putFood;
     public Money money;
     public CustomerSpawner customerSpawner;
     public Customers currentCustomer;
@@ -41,7 +42,7 @@ public class Station : MonoBehaviour
           
             currLevel =2;
             setLevel();
-            remananingUpgradePc = 3 - 1;
+            remananingUpgradePc = 3-1;
             remananingUpgradePcText.text = remananingUpgradePc.ToString();
 
         }

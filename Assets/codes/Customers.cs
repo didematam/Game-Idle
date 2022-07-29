@@ -89,17 +89,20 @@ public class Customers : MonoBehaviour
              a = Random.Range(0, 2);
             if (a == 1)
             {
-               var  x = customerspawner.food.GetRandomFood();
+                
+                var  x = customerspawner.food.GetRandomFood();
 
                 if (x == 0)
                 {
                     Hamburger.SetActive(true);
-
+                    //progress = progressBar();
+                    //StartCoroutine(progress);
                 }
                 else if (x == 1)
                 {
                     Cola.SetActive(true);
-
+                    //progress = progressBar();
+                    //StartCoroutine(progress);
                 }
 
             }
@@ -111,10 +114,10 @@ public class Customers : MonoBehaviour
 
         while (currenttime > 0)
         {
-
-
+           
 
             currenttime -= Time.deltaTime;
+
 
             if (customerspawner.putfood.putHamburger.Count != 0 && a==1)
             {
@@ -132,27 +135,27 @@ public class Customers : MonoBehaviour
                 currentStation.Gladness.addgladness(3);
                 currentStation.money.AddMoney(50);
             }
+
+
+
            
-
-
-
 
             if (currenttime <= 0)
             {
-                if (Cola.activeInHierarchy)
+                if (Cola.activeInHierarchy || Hamburger.activeInHierarchy)
                 {
 
                     currentStation.Gladness.RemoveGladness(3);
+                    AngryFace.SetActive(true);
                    
+                }
+                else
+                {
+                    HappyFace.SetActive(true);
                 }
                
 
-                if (Hamburger.activeInHierarchy)
-                {
-
-                    currentStation.Gladness.RemoveGladness(3);
-                   
-                }
+                
                
                 currentStation.Gladness.addgladness(5);
 
@@ -162,7 +165,7 @@ public class Customers : MonoBehaviour
                 currentStation.currentCustomer = null;
                 Cola.SetActive(false);
                 Hamburger.SetActive(false);
-                HappyFace.SetActive(true);
+             
                 animator.SetBool("sit", false);
 
                 agent.destination = currentStation.exit.position;
@@ -173,7 +176,7 @@ public class Customers : MonoBehaviour
 
             yield return null;
 
-            //}
+            
         }
     }
     
@@ -215,6 +218,13 @@ public class Customers : MonoBehaviour
                     Debug.Log(maxProgressBar - elapsed);
 
                 if (currentStation.putcd.putCD.Count > 0)
+                {
+                    StopCoroutine(progress);
+                    ProgressBar.SetActive(false);
+                    yield break;
+                }
+
+                if (customerspawner.putfood.putHamburger.Count > 0 || customerspawner.putfood.putCola.Count>0)
                 {
                     StopCoroutine(progress);
                     ProgressBar.SetActive(false);

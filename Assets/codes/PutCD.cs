@@ -10,6 +10,7 @@ public class PutCD : MonoBehaviour
     public GameObject spawnObject;
     public GameObject spawnLocation;
     public Transform WorkerPutCD;
+    public float spacing;
 
 
 
@@ -22,6 +23,7 @@ public class PutCD : MonoBehaviour
     public void AddPutCD()
     {
         var addedPutCD = Instantiate(spawnObject, spawnLocation.gameObject.transform);
+        addedPutCD.transform.position += transform.up * spacing * putCD.Count;
         putCD.Add(addedPutCD);
     }
    public void RemovePutCD()

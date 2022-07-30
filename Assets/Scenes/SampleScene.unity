@@ -1638,6 +1638,7 @@ MonoBehaviour:
   moneytimemax: 0.1
   CDlimit: 5
   foodlimit: 1
+  spacing: 0.1
   capasitymoney: 100
   speedmoney: 100
   WorkerSpeedMoney: 100

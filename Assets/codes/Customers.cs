@@ -84,7 +84,7 @@ public class Customers : MonoBehaviour
 
 
 
-
+        //tamir ekle
         var randomProgressFoodTime = Random.Range(5, currenttime);
         bool isStartForFood = false;
 

@@ -14,8 +14,7 @@ public class CharacterCD : MonoBehaviour
     public List<GameObject> carryCola;
     [SerializeField] public GameObject sObject;
     [SerializeField] public GameObject sLocation;
-    [SerializeField] public GameObject spawnObject;
-    [SerializeField] public GameObject spawnLocation;
+    
     [SerializeField] public GameObject hamburgerObject;
     [SerializeField] public GameObject hamburgerLocation;
     [SerializeField] public GameObject colaObject;
@@ -27,6 +26,7 @@ public class CharacterCD : MonoBehaviour
     [SerializeField] public float moneytimemax = 1f;
     [SerializeField] public int CDlimit = 5;
     [SerializeField] public int foodlimit = 1;
+    [SerializeField] public float spacing = 0.5f;
 
     public int capasitymoney = 100;
     public int speedmoney = 100;
@@ -241,7 +241,11 @@ public class CharacterCD : MonoBehaviour
 
     public void AddCarryCD()
     {
+
         var carrycd = Instantiate(sObject, sLocation.gameObject.transform);
+        carrycd.transform.position += transform.up * spacing * carryCD.Count ;
+        //carrycd.transform.position += transform.right * spacing * (carryCD.Count % 3);
+        //  carrycd.transform.position += transform.up * spacing * (carryCD.Count /3);
         carryCD.Add(carrycd);
     }
     public void RemoveCarryCD()

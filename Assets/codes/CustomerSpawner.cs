@@ -25,7 +25,7 @@ public class CustomerSpawner : MonoBehaviour
 
     public void AddCustomerSpawns()
     {
-        var selectedStation = Stations.Where(x => x.currentCustomer == null && x.gameObject.activeInHierarchy).ToList();
+        var selectedStation = Stations.Where(x => x.currentCustomer == null && x.gameObject.activeInHierarchy && x.currentWorker ==null).ToList();
         if(selectedStation.Count>0)
         {
             var x = Instantiate(CustomerSpawn, CustomerSpawnLocation.transform);

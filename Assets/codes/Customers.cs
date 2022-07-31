@@ -239,7 +239,7 @@ public class Customers : MonoBehaviour
          
 
             animator.SetBool("sit", true);
-            customerspawner.openPCScreen.SetActive(true);
+            currentStation.openPCScreen.SetActive(true);
             StartCoroutine(uptadetime());
         }
     }

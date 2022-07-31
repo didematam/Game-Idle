@@ -809,7 +809,7 @@ Animator:
   m_GameObject: {fileID: 3874585199024070613}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6b8b11bec33269549a613c1a79e71388, type: 3}
-  m_Controller: {fileID: 9100000, guid: 5dbcf3b0a87ec36468208c08aece01d4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 749b9ce4b2f90f841840379b52bc4db8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -931,17 +931,14 @@ MonoBehaviour:
   collectCD: {fileID: 0}
   agent: {fileID: -7803373178149487277}
   carryCD: []
-  carryHamburger: []
-  carryCola: []
+  canteen: {fileID: 0}
+  selectedStation: {fileID: 0}
   sObject: {fileID: 4266766688687805187, guid: 6ef84cf4a2210b046925ba9d34cefe2f, type: 3}
   sLocation: {fileID: 4972688541414772014}
-  hamburgerObject: {fileID: 4809234952569351193, guid: 62b044e7c6bc9a042becdb42e46c5792, type: 3}
-  hamburgerLocation: {fileID: 4972688541414772014}
-  colaObject: {fileID: 4809234952569351193, guid: 52442e2b621d74b4fa8ced260a39d59f, type: 3}
-  colaLocation: {fileID: 4972688541414772014}
-  foodlimit: 1
   timemax: 0.1
   elapsed: 0
+  breakTimeMax: 0.1
+  breakElapsed: 0
   carrylimit: 5
   speed: 0.1
 --- !u!1 &3891431103695764622

@@ -9,6 +9,7 @@ public class PutCD : MonoBehaviour
     public List<GameObject> putCD;
     public GameObject spawnObject;
     public GameObject spawnLocation;
+    public int putLimit=5;
     public Transform WorkerPutCD;
     public float spacing;
 

@@ -76,7 +76,7 @@ public class CharacterCD : MonoBehaviour
 
                 var putedCD = other.GetComponent<PutCD>();
 
-                if (putedCD.putCD.Count != CDlimit && carryCD.Count > 0)
+                if (putedCD.putCD.Count != putedCD.putLimit && carryCD.Count > 0)
                 {
 
                     putedCD.AddPutCD();
@@ -248,6 +248,25 @@ public class CharacterCD : MonoBehaviour
 
                 brokeStation = currentBrokenStation;
             animator.SetTrigger("repair 0");
+                charactermove.canMove = false;
+
+            }
+
+
+
+        }
+        if (other.gameObject.tag == "BreakWorker")
+        {
+
+            var currentBrokenStation = other.gameObject.GetComponentInParent<Station>();
+            if (!isActive && currentBrokenStation.currentWorker!=null)
+            {
+
+               
+                animator.SetTrigger("angry");
+                currentBrokenStation.currentWorker.animator.SetTrigger("standUp");
+                currentBrokenStation.currentWorker.breakElapsed = 0;
+                currentBrokenStation.currentWorker = null;
                 charactermove.canMove = false;
 
             }

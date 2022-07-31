@@ -12,35 +12,36 @@ public class Worker : MonoBehaviour
     public Station currentStation;
 
     public Transform collectCD;
+ 
 
 
     public NavMeshAgent agent;
     public List<GameObject> carryCD;
-    public List<GameObject> carryHamburger;
-    public List<GameObject> carryCola;
+ 
     public canteen canteen;
     public Station selectedStation;
+    public Station selectedStationBreak;
+
     [SerializeField] public GameObject sObject;
     [SerializeField] public GameObject sLocation;
-    [SerializeField] public GameObject hamburgerObject;
-    [SerializeField] public GameObject hamburgerLocation;
-    [SerializeField] public GameObject colaObject;
-    [SerializeField] public GameObject colaLocation;
-    [SerializeField] public int foodlimit = 1;
+   
+
     [SerializeField] public float timemax = 0.1f;
     [SerializeField] public float elapsed = 0f;
+    [SerializeField] public float breakTimeMax = 0.1f;
+    [SerializeField] public float breakElapsed = 0f;
     [SerializeField] public int carrylimit = 5;
     [SerializeField] public float speed = 0.1f;
-    
+    bool onWay;
 
 
 
 
     void Start()
     {
-        carryHamburger = new List<GameObject>();
-        carryCola = new List<GameObject>();
+       
         carryCD = new List<GameObject>();
+        breakTimeMax = Random.Range(10, 20);
     }
 
     private void OnTriggerStay(Collider other)
@@ -82,76 +83,6 @@ public class Worker : MonoBehaviour
 
                 elapsed = 0;
             }
-            if (other.gameObject.tag == "hamburger")
-            {
-                elapsed += Time.deltaTime;
-                if (elapsed >= timemax)
-                {
-
-
-
-                    if (carryHamburger.Count != foodlimit)
-                    {
-
-                        AddCarryHamburger();
-                    }
-
-                    elapsed = 0;
-
-
-                }
-
-            }
-            if (other.gameObject.tag == "cola")
-            {
-                elapsed += Time.deltaTime;
-                if (elapsed >= timemax)
-                {
-
-
-
-                    if (carryCola.Count != foodlimit)
-                    {
-
-                        AddCarryCola();
-                    }
-
-                    elapsed = 0;
-
-
-                }
-
-            }
-
-        }
-        if (other.gameObject.tag == "PutFoodLocation")
-        {
-            elapsed += Time.deltaTime;
-            if (elapsed >= timemax)
-            {
-
-                var putFood = other.GetComponent<PutFood>();
-
-                if (putFood.putCola.Count != foodlimit && carryCola.Count > 0 || putFood.putHamburger.Count != foodlimit && carryHamburger.Count > 0)
-                {
-
-
-                    if (carryCola.Count > 0)
-                    {
-                        putFood.AddPutCola();
-                        RemoveCarryCola();
-                    }
-                    else if (carryHamburger.Count > 0)
-                    {
-                        putFood.AddPutHamburger();
-                        RemoveCarryHamburger();
-                    }
-
-                }
-
-                elapsed = 0;
-            }
-
         }
     }
     public void AddCarryCD()
@@ -169,36 +100,7 @@ public class Worker : MonoBehaviour
         }
 
     }
-    public void AddCarryHamburger()
-    {
-        var carryHamburgers = Instantiate(hamburgerObject, hamburgerLocation.gameObject.transform);
-        carryHamburger.Add(carryHamburgers);
-    }
-    public void RemoveCarryHamburger()
-    {
-        if (carryHamburger.Count > 0)
-        {
-            var removedHamburger = carryHamburger.Last();
-            carryHamburger.Remove(removedHamburger);
-            Destroy(removedHamburger);
-        }
-
-    }
-    public void AddCarryCola()
-    {
-        var carryColas = Instantiate(colaObject, colaLocation.gameObject.transform);
-        carryCola.Add(carryColas);
-    }
-    public void RemoveCarryCola()
-    {
-        if (carryCola.Count > 0)
-        {
-            var removedCola = carryCola.Last();
-            carryCola.Remove(removedCola);
-            Destroy(removedCola);
-        }
-
-    }
+   
 
 
     void Update()
@@ -232,69 +134,83 @@ public class Worker : MonoBehaviour
         desicion();
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Target" && Vector3.Distance(agent.destination, transform.position) < 2f)
+        {
+            gameObject.transform.position = currentStation.movePositionTransform.position;
+            transform.LookAt(currentStation.Monitor);
+
+
+
+            animator.SetBool("sit", true);
+            selectedStationBreak.openPCScreen.SetActive(true);
+            selectedStationBreak.currentWorker = this;
+        }
+    }
 
     public void desicion()
     {
-        //if(WorkerSpawner.canteen.opencanteen.activeInHierarchy)
-        //{
-        //    var selectFood = GetComponent<Customers>().x;
-        //    if (selectFood == 1 && carryCola.Count <= carrylimit)
-        //    {
-        //        agent.destination = colaLocation.transform.position;
-        //    }
-        //    if (selectFood == 2 && carryHamburger.Count <= carrylimit)
-        //    {
-        //        agent.destination = hamburgerLocation.transform.position;
-        //    }
-        //}
-        //else
-        //{
-         selectedStation = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.putcd.putCD.Count == 0).OrderByDescending(x => x.putcd.putCD.Count).FirstOrDefault();
-        if (selectedStation != null)
+        if(breakTimeMax <= breakElapsed)
         {
-            agent.destination = collectCD.position;
-            if(carryCD.Count ==carrylimit)
+            if(selectedStation == null && selectedStationBreak!=null  )
             {
-                agent.destination = selectedStation.putcd.WorkerPutCD.transform.position;
+              selectedStationBreak = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.currentCustomer!=null).FirstOrDefault();
+               if(selectedStationBreak != null)
+                {
+                       agent.destination=selectedStationBreak.movePositionTransform.position;
+                    return;
+                }
             }
-        }
-
-
-
-        if (carryCD.Count == 0)
-        {
-            agent.destination = collectCD.position;
-        }
-        else if (carryCD.Count == carrylimit)
-        {
-            var selectedStation = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.putcd.putCD.Count < carrylimit).OrderByDescending(x => x.putcd.putCD.Count).FirstOrDefault();
-            if (selectedStation != null)
-            {
-                agent.destination = selectedStation.putcd.WorkerPutCD.transform.position;
-                
-
+            else 
+            { 
+              return;
+            
             }
-            else
-            {
-                agent.destination = WorkerSpawner.waiting.position;
-            }
+            
+            
         }
         else
         {
-            var selectedStation = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.putcd.putCD.Count < carrylimit).OrderByDescending(x => x.putcd.putCD.Count).FirstOrDefault();
-            if (selectedStation != null)
-            {
-                agent.destination = selectedStation.putcd.WorkerPutCD.transform.position;
+            breakElapsed += Time.deltaTime;
+        }
 
+        if (selectedStation == null )
+        {
+            selectedStation = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.putcd.putCD.Count == 0).OrderByDescending(x => x.putcd.putCD.Count).FirstOrDefault();
+            return;
+        }
+        else if (selectedStation != null)
+        {
+            if (carryCD.Count < carrylimit && !onWay)
+            {
+                agent.destination = collectCD.position;
+                return;
             }
-            else
+
+
+            else if (carryCD.Count == carrylimit || selectedStation.putcd.putCD.Count != selectedStation.putcd.putLimit)
+            {
+                onWay = true;
+                agent.destination = selectedStation.putcd.WorkerPutCD.transform.position;
+                return;
+            }
+            else if (carryCD.Count == 0 || selectedStation.putcd.putCD.Count == selectedStation.putcd.putLimit)
             {
                 agent.destination = WorkerSpawner.waiting.position;
+                onWay = false;
+                selectedStation = null;
+                for (int i = 0; i < carryCD.Count; i++)
+                {
+                    RemoveCarryCD();
+                }
+
             }
 
         }
 
-        }
+          
+    }
 
 
     

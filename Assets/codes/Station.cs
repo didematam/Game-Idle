@@ -25,6 +25,7 @@ public class Station : MonoBehaviour
     public GameObject level1;
     public GameObject level2;
     public GameObject smokeBreak;
+    public GameObject openPCScreen;
     public int currLevel;
     public TextMeshProUGUI upgradePctext;
     public int remananingUpgradePc;

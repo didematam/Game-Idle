@@ -14,6 +14,7 @@ public class WorkerSpawner : MonoBehaviour
     public canteen canteen;
     public Transform collectCDLocation;
     public GameObject WorkerSpawn;
+    
     public GameObject WorkerSpawnLocation;
     public Transform waiting;
     public TextMeshProUGUI remainingWorker;

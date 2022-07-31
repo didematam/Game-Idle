@@ -22,6 +22,7 @@ public class Customers : MonoBehaviour
     [SerializeField] private Image uiFill;
     [SerializeField] private Image uiFillFood;
     [SerializeField] private Image uiFillBreak;
+    public GameObject openPC;
     public float speed = 0.01f;
     public GameObject ProgressBar;
     public GameObject ProgressBarFoods;
@@ -212,6 +213,8 @@ public class Customers : MonoBehaviour
                 
              
                 animator.SetBool("sit", false);
+                customerspawner.openPCScreen.SetActive(false);
+                
                 HappyFace.SetActive(true);
                 agent.destination = currentStation.exit.position;
                 isDestroy = true;
@@ -236,8 +239,8 @@ public class Customers : MonoBehaviour
          
 
             animator.SetBool("sit", true);
-            
-           StartCoroutine(uptadetime());
+            customerspawner.openPCScreen.SetActive(true);
+            StartCoroutine(uptadetime());
         }
     }
 
@@ -280,8 +283,8 @@ public class Customers : MonoBehaviour
                     currentStation.Gladness.RemoveGladness(5);
                     AngryFace.SetActive(true);
                     animator.SetBool("sit", false);
-                    
-                   
+
+                    customerspawner.openPCScreen.SetActive(false);
                     ProgressBar.SetActive(false);
                         agent.destination = currentStation.exit.position;
                         isDestroy = true;
@@ -343,7 +346,7 @@ public class Customers : MonoBehaviour
                     currentStation.Gladness.RemoveGladness(5);
                     AngryFace.SetActive(true);
                     animator.SetBool("sit", false);
-
+                    customerspawner.openPCScreen.SetActive(false);
 
                     ProgressBarBroke.SetActive(false);
                     agent.destination = currentStation.exit.position;

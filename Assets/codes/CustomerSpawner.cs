@@ -10,6 +10,7 @@ public class CustomerSpawner : MonoBehaviour
     public List<Food> foods;
     public GameObject CustomerSpawn;
     public GameObject CustomerSpawnLocation;
+    public GameObject openPCScreen;
     public canteen canteen;
     public Food food;
     public PutFood putfood;
@@ -17,8 +18,8 @@ public class CustomerSpawner : MonoBehaviour
     {
 
         CustomerSpawns=new List<GameObject>();
-       
 
+       openPCScreen.SetActive(false);
     }
 
 

@@ -10,7 +10,7 @@ public class AllStations : MonoBehaviour
 
     void Start()
     {
-        Stations= new List<Station>();
+        
     }
 
     

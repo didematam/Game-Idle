@@ -19,7 +19,7 @@ public class Worker : MonoBehaviour
     public List<GameObject> carryHamburger;
     public List<GameObject> carryCola;
     public canteen canteen;
-
+    public Station selectedStation;
     [SerializeField] public GameObject sObject;
     [SerializeField] public GameObject sLocation;
     [SerializeField] public GameObject hamburgerObject;
@@ -232,6 +232,7 @@ public class Worker : MonoBehaviour
         desicion();
 
     }
+
     public void desicion()
     {
         //if(WorkerSpawner.canteen.opencanteen.activeInHierarchy)
@@ -248,10 +249,17 @@ public class Worker : MonoBehaviour
         //}
         //else
         //{
+         selectedStation = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.putcd.putCD.Count == 0).OrderByDescending(x => x.putcd.putCD.Count).FirstOrDefault();
+        if (selectedStation != null)
+        {
+            agent.destination = collectCD.position;
+            if(carryCD.Count ==carrylimit)
+            {
+                agent.destination = selectedStation.putcd.WorkerPutCD.transform.position;
+            }
+        }
 
-      
 
-       
 
         if (carryCD.Count == 0)
         {

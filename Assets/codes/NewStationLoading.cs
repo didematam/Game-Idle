@@ -65,8 +65,10 @@ public class NewStationLoading : MonoBehaviour
                 Debug.Log("0 oldu");
 
 
-                //openStation.active = true;
-                allStations.GetLevel();
+               
+                
+                openStation.GetComponent<Station>().currLevel = allStations.GetLevel();
+                openStation.SetActive(true);
                 CloseCanvas.SetActive(false);
 
 

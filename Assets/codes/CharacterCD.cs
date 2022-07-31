@@ -12,9 +12,10 @@ public class CharacterCD : MonoBehaviour
     public List<GameObject> carryCD;
     public List<GameObject> carryHamburger;
     public List<GameObject> carryCola;
+    public Animator animator;
     [SerializeField] public GameObject sObject;
     [SerializeField] public GameObject sLocation;
-    
+    public CharacterMove charactermove;
     [SerializeField] public GameObject hamburgerObject;
     [SerializeField] public GameObject hamburgerLocation;
     [SerializeField] public GameObject colaObject;
@@ -27,7 +28,8 @@ public class CharacterCD : MonoBehaviour
     [SerializeField] public int CDlimit = 5;
     [SerializeField] public int foodlimit = 1;
     [SerializeField] public float spacing = 0.5f;
-
+    public Station brokeStation;
+    
     public int capasitymoney = 100;
     public int speedmoney = 100;
     public int WorkerSpeedMoney = 100;
@@ -36,6 +38,7 @@ public class CharacterCD : MonoBehaviour
     public TextMeshProUGUI currentMoneyText;
     public TextMeshProUGUI currentMoneyCapacity;
     bool isActive;
+    
     void Start()
     {
         carryCD = new List<GameObject>();
@@ -62,7 +65,7 @@ public class CharacterCD : MonoBehaviour
 
 
         }
-
+        
 
 
         if (other.gameObject.tag == "PutCDLocation")
@@ -236,9 +239,30 @@ public class CharacterCD : MonoBehaviour
 
 
         }
+        if (other.gameObject.tag == "BrokeStation")
+        {
+
+            var currentBrokenStation = other.gameObject.GetComponentInParent<Station>();
+            if (!isActive)
+            {
+
+                brokeStation = currentBrokenStation;
+            animator.SetTrigger("repair 0");
+                charactermove.canMove = false;
+
+            }
+
+
+
+        }
+
     }
-
-
+ public void repair()
+    {
+        brokeStation.Repair();
+        charactermove.canMove = true;
+    }
+    
     public void AddCarryCD()
     {
 

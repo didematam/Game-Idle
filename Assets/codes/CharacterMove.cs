@@ -23,14 +23,16 @@ public class CharacterMove : MonoBehaviour
 
     }
 
-
+    public bool canMove = true;
     void Update()
     {
-        move();
+        if (canMove)
+        {
+            move();
+          
+
+        }
         animators();
-
-
-
     }
     void move()
     {
@@ -44,36 +46,40 @@ public class CharacterMove : MonoBehaviour
             gameObject.transform.forward = move;
         }
     }
-
+  
     void animators()
+
     {
-        var x = joystick.Horizontal;
-        var y = joystick.Vertical;
+        
+            var x = joystick.Horizontal;
+            var y = joystick.Vertical;
 
-        if (x != 0 || y != 0)
-        {
-            Rigidbody.isKinematic = false;
-            animator.SetBool("running", true);
+            if (x != 0 || y != 0)
+            {
+                Rigidbody.isKinematic = false;
+                animator.SetBool("running", true);
 
-        }
-        else
-        {
-            Rigidbody.isKinematic = true;
-            animator.SetBool("running", false);
-        }
-       
+            }
+            else
+            {
+                Rigidbody.isKinematic = true;
+                animator.SetBool("running", false);
+            }
 
-        if (CharacterCD.carryCD.Count != 0 || CharacterCD.carryHamburger.Count != 0 || CharacterCD.carryCola.Count!=0 )
-        {
-           
 
-            animator.SetBool("carry", true);
-        }
-        else
-        {
+            if (CharacterCD.carryCD.Count != 0 || CharacterCD.carryHamburger.Count != 0 || CharacterCD.carryCola.Count != 0)
+            {
 
-            animator.SetBool("carry", false);
-        }
+
+                animator.SetBool("carry", true);
+            }
+            else
+            {
+
+                animator.SetBool("carry", false);
+            }
+
+        
 
     }
     public void upgradeSpeed()

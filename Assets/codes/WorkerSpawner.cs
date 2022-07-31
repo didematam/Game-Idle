@@ -11,6 +11,7 @@ public class WorkerSpawner : MonoBehaviour
     public List<Station> Stations;
     public CharacterCD character;
     public Station Station;
+    public canteen canteen;
     public Transform collectCDLocation;
     public GameObject WorkerSpawn;
     public GameObject WorkerSpawnLocation;

@@ -17,6 +17,7 @@ TagManager:
   - hamburger
   - cola
   - PutFoodLocation
+  - BrokeStation
   layers:
   - Default
   - TransparentFX

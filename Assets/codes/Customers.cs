@@ -21,27 +21,33 @@ public class Customers : MonoBehaviour
     public float minProgressBar;
     [SerializeField] private Image uiFill;
     [SerializeField] private Image uiFillFood;
+    [SerializeField] private Image uiFillBreak;
     public float speed = 0.01f;
     public GameObject ProgressBar;
     public GameObject ProgressBarFoods;
+    public GameObject ProgressBarBroke;
     public GameObject HappyFace;
     public GameObject AngryFace;
     public GameObject Cola;
     public GameObject Hamburger;
+ 
     public int a;
     public int x;
     bool isProgressBarStart;
     bool isProgressBarFoodStart;
+    bool isProgressBarBreakStart;
     IEnumerator progress;
     IEnumerator progressFood;
-
+    IEnumerator progressBroke;
     bool isDestroy;
+   
     //bool isStartForFood 
 
 
     private void Awake()
     {
         ProgressBar.SetActive(false);
+        ProgressBarBroke.SetActive(false);
         ProgressBarFoods.SetActive(false);
         HappyFace.SetActive(false);
         AngryFace.SetActive(false);
@@ -67,13 +73,22 @@ public class Customers : MonoBehaviour
     private IEnumerator uptadetime()
 
     {
+        while (currentStation.smokeBreak.activeInHierarchy)
+        {
+            progressBroke = progressBarBroke();
+            StartCoroutine(progressBroke);
+            yield return null;
+        }
 
+        
+        
+       
         while (currentStation.putcd.putCD.Count == 0)
         {
 
             progress = progressBar();
             StartCoroutine(progress);
-
+          
 
             yield return null;
 
@@ -84,12 +99,19 @@ public class Customers : MonoBehaviour
 
 
 
-        //tamir ekle
+       
         var randomProgressFoodTime = Random.Range(5, currenttime);
         bool isStartForFood = false;
-
+        
         while (currenttime > 0)
         {
+
+            
+           
+
+
+
+
             if(currenttime<= randomProgressFoodTime && !isStartForFood )
             {
                 isStartForFood=true;
@@ -99,8 +121,6 @@ public class Customers : MonoBehaviour
                 }
                 else
                 {
-
-
                     a = Random.Range(1, 1);
                     if (a == 1)
                     {
@@ -140,6 +160,18 @@ public class Customers : MonoBehaviour
             
 
             currenttime -= Time.deltaTime;
+           
+
+            while (currentStation.smokeBreak.activeInHierarchy)
+            {
+                progressBroke = progressBarBroke();
+                StartCoroutine(progressBroke);
+                ProgressBarBroke.SetActive(true);
+                
+                yield return null;
+            }
+           
+            ProgressBarBroke.SetActive(false);
 
 
             if (customerspawner.putfood.putHamburger.Count != 0 && a==1)
@@ -192,9 +224,8 @@ public class Customers : MonoBehaviour
             
         }
     }
+
     
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Target" && Vector3.Distance(agent.destination, transform.position) < 2f)
@@ -218,6 +249,8 @@ public class Customers : MonoBehaviour
             {
                 isProgressBarStart = true;
                 ProgressBar.SetActive(true);
+            
+
 
             
             float elapsed = 0;
@@ -234,14 +267,17 @@ public class Customers : MonoBehaviour
                 {
                     StopCoroutine(progress);
                     ProgressBar.SetActive(false);
+
                     yield break;
                 }
-                
-                
+               
+
+
+
 
                 if (maxProgressBar - elapsed <= 0.33)
                     {
-                    
+                    currentStation.Gladness.RemoveGladness(5);
                     AngryFace.SetActive(true);
                     animator.SetBool("sit", false);
                     
@@ -272,6 +308,69 @@ public class Customers : MonoBehaviour
             }
            
         
+    }
+    private IEnumerator progressBarBroke()
+    {
+
+
+        if (!isProgressBarBreakStart)
+        {
+            isProgressBarBreakStart = true;
+            ProgressBarBroke.SetActive(true);
+           
+
+            float elapsed = 0;
+
+
+            while (elapsed <= maxProgressBar)
+            {
+                elapsed += Time.deltaTime;
+
+                uiFillBreak.fillAmount = Mathf.InverseLerp(0, maxProgressBar, maxProgressBar - elapsed);
+                Debug.Log(maxProgressBar - elapsed);
+
+               if(!currentStation.smokeBreak.activeInHierarchy)
+                {
+                    StopCoroutine(progressBroke);
+                    ProgressBarBroke.SetActive(false);
+                    isProgressBarBreakStart = false;
+                    yield break;
+                }
+
+
+                if (maxProgressBar - elapsed <= 0.33)
+                {
+                    currentStation.Gladness.RemoveGladness(5);
+                    AngryFace.SetActive(true);
+                    animator.SetBool("sit", false);
+
+
+                    ProgressBarBroke.SetActive(false);
+                    agent.destination = currentStation.exit.position;
+                    isDestroy = true;
+                    yield break;
+                }
+
+                if (elapsed >= maxProgressBar)
+                {
+
+
+                    yield break;
+
+                }
+
+
+
+                yield return null;
+
+
+
+            }
+
+            yield return null;
+        }
+
+
     }
     private IEnumerator progressBarFood()
     {
@@ -381,5 +480,6 @@ public class Customers : MonoBehaviour
         Hamburger.transform.LookAt(Camera.main.transform.position);
         Cola.transform.LookAt(Camera.main.transform.position);
         ProgressBarFoods.transform.LookAt(Camera.main.transform.position);
+        ProgressBarBroke.transform.LookAt(Camera.main.transform.position);
     }
 }

@@ -24,15 +24,38 @@ public class Station : MonoBehaviour
     public int Stationmoney = 100;
     public GameObject level1;
     public GameObject level2;
+    public GameObject smokeBreak;
     public int currLevel;
     public TextMeshProUGUI upgradePctext;
     public int remananingUpgradePc;
     public TextMeshProUGUI remananingUpgradePcText;
+    public float maxTime;
+    public float currTime;
+   
 
-    public Station Stations;
+   public bool isBroke;
+    public void BrokeTime()
+    {
+        if (currTime < maxTime && !isBroke)
+        {
+            currTime += Time.deltaTime;
+        }
+        else
+        {
+            smokeBreak.SetActive(true);
+            isBroke = true;
+            currTime = 0;
 
+        }
+       
 
-
+    }
+    public void Repair()
+    {
+        isBroke=false;
+        smokeBreak.SetActive(false);
+    }
+   
     public void upgradestation()
     {
         if (WorkerSpawner.character.currentMoney >= Stationmoney)
@@ -54,8 +77,8 @@ public class Station : MonoBehaviour
     {
        
         currLevel = 1;
-      
-       
+        maxTime = Random.Range(5, 10);
+        smokeBreak.SetActive(false);
 
     }
 
@@ -78,6 +101,6 @@ public class Station : MonoBehaviour
     
     void Update()
     {
-        
+        BrokeTime();
     }
 }

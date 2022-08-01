@@ -22,7 +22,7 @@ public class Customers : MonoBehaviour
     [SerializeField] private Image uiFill;
     [SerializeField] private Image uiFillFood;
     [SerializeField] private Image uiFillBreak;
-    public GameObject openPC;
+
     public float speed = 0.01f;
     public GameObject ProgressBar;
     public GameObject ProgressBarFoods;
@@ -239,7 +239,7 @@ public class Customers : MonoBehaviour
          
 
             animator.SetBool("sit", true);
-            currentStation.openPCScreen.SetActive(true);
+         
             StartCoroutine(uptadetime());
         }
     }

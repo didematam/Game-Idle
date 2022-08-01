@@ -9,42 +9,44 @@ public class Gladness : MonoBehaviour
     public Station currentStation;
 
     public Customers customers;
-    public List<int> gladdness;
     public int happy=0;
     public int sad = 0;
     public int happyamount;
     public TMP_Text text;
- 
+
+    public string ID;
+    public string Name;
+
 
     void Start()
     {
-        gladdness = new List<int>();
+        loadData();
     }
     
    public void addgladness(int countGladness)
     {
 
         happyamount += countGladness ;
-        gladdness.Add(happyamount);
-       
        
     }
     public void RemoveGladness(int countGladness)
     {
         happyamount -= countGladness;
-
-        if(happyamount >= 0)
-        {
-            gladdness.Remove(happyamount);
-        }
-
-          
-        
-        
-      
     }
+    public void saveData()
+    {
+
+        PlayerPrefs.SetInt(ID + Name + "happyamount ", happyamount);
+
+    }
+    public void loadData()
+    {
+        happyamount = PlayerPrefs.GetInt(ID + Name + "happyamount ", happyamount);
+    }
+
     void Update()
     {
+        saveData();
         text.text = happyamount.ToString();
     }
 }

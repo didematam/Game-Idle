@@ -14,15 +14,16 @@ public class canteen : MonoBehaviour
     [SerializeField] private Image uiFill;
     public GameObject opencanteen;
     public GameObject CloseCanvas;
-   
+
+    public string ID;
+    public string Name;
 
     void Start()
     {
-        
-        moneyText.text = totalMoney.ToString();
+        loadData();
     }
 
-    private IEnumerator opeenCanteen()
+    private IEnumerator opeenCanteen(bool isload)
     {
         var x = CharacterCD.GetComponent<CharacterCD>();
 
@@ -40,8 +41,11 @@ public class canteen : MonoBehaviour
 
             if (a > 0)
             {
-                x.currentMoney -= 1;
-                paidMoney += 1;
+                if(!isload)
+                {
+                    x.currentMoney -= 1;
+                    paidMoney += 1;
+                }
                 a = totalMoney - paidMoney;
                 uiFill.fillAmount = Mathf.InverseLerp(0, totalMoney, paidMoney);
                 moneyText.text = a.ToString();
@@ -51,7 +55,7 @@ public class canteen : MonoBehaviour
 
             if (paidMoney >= totalMoney)
             {
-                StopCoroutine(opeenCanteen());
+                StopCoroutine(opeenCanteen(false));
                 Debug.Log("0 oldu");
 
 
@@ -67,17 +71,30 @@ public class canteen : MonoBehaviour
 
 
         }
-       
+
 
     }
-    public void openCanteen()
+    public void openCanteen(bool isload)
     {
-        StartCoroutine(opeenCanteen());
-        }
-    
-   
+        StartCoroutine(opeenCanteen(isload));
+    }
+    public void saveData()
+    {
+
+        PlayerPrefs.SetFloat(ID + Name + "paidmoney ", paidMoney);
+
+    }
+    public void loadData()
+    {
+        paidMoney = PlayerPrefs.GetFloat(ID + Name + "paidmoney ", paidMoney);
+        openCanteen(true);
+    }
+
+ 
+
+
     void Update()
     {
-        
+        saveData();
     }
 }

@@ -9,7 +9,6 @@ public class Worker : MonoBehaviour
 {
     public WorkerSpawner WorkerSpawner;
     public Animator animator;
-    public Station currentStation;
 
     public Transform collectCD;
  
@@ -138,14 +137,18 @@ public class Worker : MonoBehaviour
     {
         if (other.gameObject.tag == "Target" && Vector3.Distance(agent.destination, transform.position) < 2f)
         {
-            gameObject.transform.position = currentStation.movePositionTransform.position;
-            transform.LookAt(currentStation.Monitor);
+            if(selectedStationBreak != null)
+            {
+                transform.position = selectedStationBreak.movePositionTransform.position;
+                transform.LookAt(selectedStationBreak.Monitor);
 
+                selectedStationBreak.isBroke = false;
+                selectedStationBreak.smokeBreak.SetActive(false);
 
-
-            animator.SetBool("sit", true);
-            selectedStationBreak.openPCScreen.SetActive(true);
-            selectedStationBreak.currentWorker = this;
+                animator.SetBool("sit", true);
+                selectedStationBreak.openPCScreen.SetActive(true);
+                selectedStationBreak.currentWorker = this;
+            }
         }
     }
 
@@ -153,20 +156,16 @@ public class Worker : MonoBehaviour
     {
         if(breakTimeMax <= breakElapsed)
         {
-            if(selectedStation == null && selectedStationBreak!=null  )
+            if(selectedStation == null && selectedStationBreak==null  )
             {
-              selectedStationBreak = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.currentCustomer!=null).FirstOrDefault();
+              selectedStationBreak = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.currentCustomer==null ).FirstOrDefault();
                if(selectedStationBreak != null)
                 {
                        agent.destination=selectedStationBreak.movePositionTransform.position;
                     return;
                 }
             }
-            else 
-            { 
-              return;
-            
-            }
+         
             
             
         }
@@ -218,8 +217,7 @@ public class Worker : MonoBehaviour
     {
         if (WorkerSpawner.character.currentMoney >= WorkerSpawner.character.WorkerCapacityMoney)
         {
-            WorkerSpawner.character.currentMoney -= WorkerSpawner.character.WorkerCapacityMoney;
-            WorkerSpawner. character.WorkerCapacityMoney *= 2;
+          
             var x = carrylimit + 3;
             carrylimit = (int)x;
            
@@ -228,17 +226,15 @@ public class Worker : MonoBehaviour
         WorkerSpawner.CapacityText.text = WorkerSpawner.character.WorkerCapacityMoney.ToString();
 
     }
-    //public void upgradeSpeed()
-    //{
-    //    if (WorkerSpawner.character.currentMoney >= WorkerSpawner.character.WorkerSpeedMoney)
-    //    {
-    //        WorkerSpawner.character.currentMoney -= WorkerSpawner.character.WorkerSpeedMoney;
-    //        WorkerSpawner.character.WorkerSpeedMoney *= 2;
-    //        var x = carrylimit + 3;
-    //        carrylimit = (int)x;
+    public void upgradeSpeed()
+    {
+        if (WorkerSpawner.character.currentMoney >= WorkerSpawner.character.WorkerSpeedMoney)
+        {
+          
+             agent.speed += 1;
 
-    //    }
+        }
 
-    //    WorkerSpawner.CapacityText.text = WorkerSpawner.character.WorkerSpeedMoney.ToString();
-    //}
+        WorkerSpawner.SpeedText.text = WorkerSpawner.character.WorkerSpeedMoney.ToString();
+    }
 }

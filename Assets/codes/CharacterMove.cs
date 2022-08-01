@@ -9,7 +9,8 @@ public class CharacterMove : MonoBehaviour
     CharacterController characcontrol;
     public CharacterCD CharacterCD;
     public Rigidbody Rigidbody;
-   
+    public string ID;
+    public string Name;
     public TextMeshProUGUI speedText;
 
     [SerializeField] Animator animator;
@@ -19,6 +20,7 @@ public class CharacterMove : MonoBehaviour
     {
         characcontrol=GetComponent<CharacterController>();
         Rigidbody=GetComponent<Rigidbody>();
+        loadData();
 
 
     }
@@ -33,6 +35,7 @@ public class CharacterMove : MonoBehaviour
 
         }
         animators();
+        saveData();
     }
     void move()
     {
@@ -94,6 +97,21 @@ public class CharacterMove : MonoBehaviour
         }
         speedText.text = CharacterCD.speedmoney.ToString();
 
+    }
+
+    public void saveData()
+    {
+        PlayerPrefs.SetFloat(ID + name + " player x konumu", transform.position.x);
+        PlayerPrefs.SetFloat(ID + name + " player y konumu", transform.position.y);
+        PlayerPrefs.SetFloat(ID + name + " player z konumu", transform.position.z);
+    }
+    public void loadData()
+    {
+        var x = PlayerPrefs.GetFloat(ID + name + " player x konumu", transform.position.x);
+        var y = PlayerPrefs.GetFloat(ID + name + " player y konumu", transform.position.y);
+        var z = PlayerPrefs.GetFloat(ID + name + " player z konumu", transform.position.z);
+        transform.position = new Vector3(x, y, z);
+        
     }
 }
 

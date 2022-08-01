@@ -28,8 +28,7 @@ public class CharacterCD : MonoBehaviour
     [SerializeField] public int CDlimit = 5;
     [SerializeField] public int foodlimit = 1;
     [SerializeField] public float spacing = 0.5f;
-    public Station brokeStation;
-    
+    public Station brokeStation;    
     public int capasitymoney = 100;
     public int speedmoney = 100;
     public int WorkerSpeedMoney = 100;
@@ -37,6 +36,8 @@ public class CharacterCD : MonoBehaviour
     public double currentMoney;
     public TextMeshProUGUI currentMoneyText;
     public TextMeshProUGUI currentMoneyCapacity;
+    public string ID;
+    public string Name;
     bool isActive;
     
     void Start()
@@ -44,6 +45,7 @@ public class CharacterCD : MonoBehaviour
         carryCD = new List<GameObject>();
         carryHamburger = new List<GameObject>();
         carryCola = new List<GameObject>();
+        loadData();
     }
 
     private void OnTriggerStay(Collider other)
@@ -124,7 +126,7 @@ public class CharacterCD : MonoBehaviour
 
                 var moneyList = other.GetComponent<Money>();
 
-                if (moneyList.moneyCount > 0)
+                if (moneyList.money.Count > 0)
                 {
                     var outMoney = moneyList.RemoveMoney();
 
@@ -149,7 +151,7 @@ public class CharacterCD : MonoBehaviour
                 if (currentMoney >= 0)
             {
 
-                other.GetComponent<NewStationLoading>().çapýr();
+                other.GetComponent<NewStationLoading>().çapýr(false);
 
                 currentMoneyText.text = currentMoney.ToString();
 
@@ -171,7 +173,7 @@ public class CharacterCD : MonoBehaviour
                     if (currentMoney >= 0)
                 {
                 
-                    other.GetComponent<canteen>().openCanteen();
+                    other.GetComponent<canteen>().openCanteen(false);
 
                     currentMoneyText.text = currentMoney.ToString();
 
@@ -287,8 +289,7 @@ public class CharacterCD : MonoBehaviour
 
         var carrycd = Instantiate(sObject, sLocation.gameObject.transform);
         carrycd.transform.position += transform.up * spacing * carryCD.Count ;
-        //carrycd.transform.position += transform.right * spacing * (carryCD.Count % 3);
-        //  carrycd.transform.position += transform.up * spacing * (carryCD.Count /3);
+        
         carryCD.Add(carrycd);
     }
     public void RemoveCarryCD()
@@ -346,6 +347,34 @@ public class CharacterCD : MonoBehaviour
     }
     void Update()
     {
-
+        saveData();
+        currentMoneyText.text = currentMoney.ToString();
+    }
+    public void saveData()
+    {
+        PlayerPrefs.SetInt(ID + Name + "carryCD", carryCD.Count);
+        PlayerPrefs.SetInt(ID + Name + "carryCola", carryCola.Count);
+        PlayerPrefs.SetInt(ID + Name + "carryHamburger", carryHamburger.Count);// add ve remove ksýýmlarýnda daha mantklý olabilir.
+        PlayerPrefs.SetFloat(ID + Name + "currentMoney",((float)currentMoney));
+    }
+    public void loadData()
+    {
+        var x = PlayerPrefs.GetInt(ID + Name + "carryCD", carryCD.Count);
+      for(int i = 0; i < x; i++)
+        {
+            AddCarryCD();
+        }
+        var y= PlayerPrefs.GetInt(ID + Name + "carryCola", carryCola.Count);
+        for (int i = 0; i < y; i++)
+        {
+            AddCarryCola();
+        }
+        var z = PlayerPrefs.GetInt(ID + Name + "carryHamburger", carryHamburger.Count);
+        for (int i = 0; i < z; i++)
+        {
+            AddCarryHamburger();
+        }
+        currentMoney=PlayerPrefs.GetFloat(ID + Name + "currentMoney", ((float)currentMoney));
+        currentMoneyText.text = currentMoney.ToString();
     }
 }

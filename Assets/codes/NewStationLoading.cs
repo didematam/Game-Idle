@@ -11,11 +11,12 @@ public class NewStationLoading : MonoBehaviour
     [SerializeField] public GameObject CharacterCD;
     [SerializeField] private Image uiFill; 
     public float totalMoney=100f;
-    public Station station;
     public float paidMoney;
     public GameObject openStation;
     public GameObject CloseCanvas;
   public AllStations allStations;
+    public string ID;
+    public string name;
 
 
 
@@ -32,7 +33,7 @@ public class NewStationLoading : MonoBehaviour
         
     }
 
-    private IEnumerator uptadeMoney()
+    private IEnumerator uptadeMoney(bool isload)
     {
         var x = CharacterCD.GetComponent<CharacterCD>();
 
@@ -50,8 +51,11 @@ public class NewStationLoading : MonoBehaviour
 
             if (a > 0)
             {
-                x.currentMoney -= 1;
-                paidMoney += 1;
+                if(!isload)
+                {
+                    x.currentMoney -= 1;
+                    paidMoney += 1;
+                }
                 a = totalMoney - paidMoney;
                 uiFill.fillAmount = Mathf.InverseLerp(0, totalMoney, paidMoney);
                 moneyText.text = a.ToString();
@@ -61,7 +65,7 @@ public class NewStationLoading : MonoBehaviour
            
             if(paidMoney >= totalMoney)
             {
-                StopCoroutine(uptadeMoney());
+                StopCoroutine(uptadeMoney(false));
                 Debug.Log("0 oldu");
 
 
@@ -83,19 +87,30 @@ public class NewStationLoading : MonoBehaviour
         
     }
 
-    public void çapýr()
+    public void çapýr(bool isload)
     {
-        StartCoroutine(uptadeMoney());
+        StartCoroutine(uptadeMoney(isload));
+    }
+    public void saveData()
+    {
+        
+            PlayerPrefs.SetFloat(ID + name + "paidmoney ", paidMoney);
+        
+    }
+    public void loadData()
+    {
+        paidMoney= PlayerPrefs.GetFloat(ID + name + "paidmoney ", paidMoney);
+        çapýr(true);
     }
 
     void Start()
     {
-     
+        loadData();
     }
 
   
     void Update()
     {
-        
+        saveData();
     }
 }

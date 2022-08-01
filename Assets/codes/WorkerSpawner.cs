@@ -20,6 +20,7 @@ public class WorkerSpawner : MonoBehaviour
     public TextMeshProUGUI remainingWorker;
     public int Worker;
     public TextMeshProUGUI CapacityText;
+    public TextMeshProUGUI SpeedText;
     public float speed = 0.1f;
 
 

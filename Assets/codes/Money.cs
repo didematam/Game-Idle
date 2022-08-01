@@ -12,63 +12,65 @@ public class Money : MonoBehaviour
     public List<GameObject>money;
     public GameObject moneys;
     public GameObject moneyLocation;    
-    public int moneyCount;
-    public Transform Location;
-    public Transform Moneys;
-    public Transform startpos;
-    
-    public int numberofrows;
-    public int numberofcolumns;
+    public string ID;
+    public string Name;
+
+
+
     public float spacing;
 
     void Start()
     {
-        List<Money> moneys = new List<Money>();
-       
+     money = new List<GameObject>();
+        loadData();
     }
 
     public void AddMoney(int moneyAmount)
     {
         
-        moneyCount += moneyAmount;
-        for (int row = 0; row < numberofrows; row++)
+        for(int i = 0; i < moneyAmount; i+=5)
         {
-            for (int col = 0; col < numberofcolumns; col++)
-            {
-                Vector3 start = new Vector3(startpos.position.x + col * spacing,  startpos.position.y, startpos.position.z - row * spacing);
-                Transform x = Instantiate(Moneys, start, Quaternion.identity);
-                x.SetParent(Location);
-                money.Add(x.gameObject);
-
-            }
+            var x = Instantiate(moneys, moneyLocation.gameObject.transform);
+            x.transform.position += transform.right * spacing*4 * (money.Count % 3);
+            x.transform.position += transform.up * spacing * (money.Count / 3);
+            money.Add(x);
         }
-        //var x = Instantiate(moneys, moneyLocation.gameObject.transform);
+      
+
        
 
     }
     public double RemoveMoney()
     {
-       var outMoney= Math.Round((double)(moneyCount / money.Count), MidpointRounding.AwayFromZero);
-        moneyCount -= ((int)outMoney);
         if(money.Count > 0)
         {
 
             var removedMoney = money.Last();
             money.Remove(removedMoney);
             Destroy(removedMoney);
-           
+            return 5;
+
         }
+        return 0;
 
-        return outMoney;
 
     }
-    void spawnmone()
+
+    public void saveData()
     {
-       
+        PlayerPrefs.SetInt(ID + Name + "money.Count", money.Count);
     }
-    
+    public void loadData()
+    {
+        var x = PlayerPrefs.GetInt(ID + Name + "money.Count", money.Count);
+            for (int i = 0; i < x; i++)
+        {
+            AddMoney(5);
+        }
+    }
     void Update()
     {
-       
+
+        saveData();
     }
 }

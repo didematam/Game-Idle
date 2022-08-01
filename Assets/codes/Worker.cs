@@ -11,7 +11,7 @@ public class Worker : MonoBehaviour
     public Animator animator;
 
     public Transform collectCD;
- 
+    public GameObject brokeImage;
 
 
     public NavMeshAgent agent;
@@ -41,6 +41,7 @@ public class Worker : MonoBehaviour
        
         carryCD = new List<GameObject>();
         breakTimeMax = Random.Range(10, 20);
+        brokeImage.SetActive(false);
     }
 
     private void OnTriggerStay(Collider other)
@@ -131,7 +132,7 @@ public class Worker : MonoBehaviour
         }
 
         desicion();
-
+        brokeImage.transform.LookAt(Camera.main.transform.position);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -144,7 +145,7 @@ public class Worker : MonoBehaviour
 
                 selectedStationBreak.isBroke = false;
                 selectedStationBreak.smokeBreak.SetActive(false);
-
+                brokeImage.SetActive(true);
                 animator.SetBool("sit", true);
                 selectedStationBreak.openPCScreen.SetActive(true);
                 selectedStationBreak.currentWorker = this;

@@ -28,7 +28,9 @@ public class CharacterCD : MonoBehaviour
     [SerializeField] public int CDlimit = 5;
     [SerializeField] public int foodlimit = 1;
     [SerializeField] public float spacing = 0.5f;
-    public Station brokeStation;    
+    public Station brokeStation;
+    public Station currentBrokenStation;
+    public Worker worker;
     public int capasitymoney = 100;
     public int speedmoney = 100;
     public int WorkerSpeedMoney = 100;
@@ -264,11 +266,9 @@ public class CharacterCD : MonoBehaviour
             if (!isActive && currentBrokenStation.currentWorker!=null)
             {
 
-               
+                this.currentBrokenStation = currentBrokenStation;
                 animator.SetTrigger("angry");
-                currentBrokenStation.currentWorker.animator.SetTrigger("standUp");
-                currentBrokenStation.currentWorker.breakElapsed = 0;
-                currentBrokenStation.currentWorker = null;
+                
                 charactermove.canMove = false;
 
             }
@@ -277,6 +277,14 @@ public class CharacterCD : MonoBehaviour
 
         }
 
+    }
+    public void angry()
+    {
+        charactermove.canMove = true;
+        currentBrokenStation.currentWorker.animator.SetTrigger("StandUp");
+        worker.brokeImage.SetActive(false);
+        currentBrokenStation.currentWorker.breakElapsed = 0;
+        currentBrokenStation.currentWorker = null;
     }
  public void repair()
     {

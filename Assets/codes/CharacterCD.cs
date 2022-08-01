@@ -59,7 +59,7 @@ public class CharacterCD : MonoBehaviour
             {
                 var createdCD = other.GetComponent<CreatCD>();
 
-                if (carryCD.Count != CDlimit)
+                if (carryCD.Count != CDlimit && carryCola.Count==0 && carryHamburger.Count == 0)
                 {
                     createdCD.RemoveCD();
                     AddCarryCD();
@@ -69,7 +69,28 @@ public class CharacterCD : MonoBehaviour
 
 
         }
-        
+        if (other.gameObject.tag == "Trash")
+        {
+            elapsed += Time.deltaTime;
+            if (elapsed >= timemax)
+            {
+
+                if (carryCD.Count > 0)
+                {
+                    RemoveCarryCD();
+                }
+                if (carryCola.Count > 0)
+                {
+                    RemoveCarryCola();
+                }
+                if (carryHamburger.Count > 0)
+                {
+                    RemoveCarryHamburger();
+                }
+                elapsed = 0;
+
+            }
+        }
 
 
         if (other.gameObject.tag == "PutCDLocation")
@@ -195,7 +216,7 @@ public class CharacterCD : MonoBehaviour
 
                 
 
-                if (carryHamburger.Count != foodlimit)
+                if (carryHamburger.Count != foodlimit && carryCola.Count == 0 && carryCD.Count == 0)
                 {
 
                      AddCarryHamburger();
@@ -215,7 +236,7 @@ public class CharacterCD : MonoBehaviour
 
                 
 
-                if (carryCola.Count != foodlimit)
+                if (carryCola.Count != foodlimit && carryCD.Count == 0 && carryHamburger.Count == 0 )
                 {
 
                     AddCarryCola();

@@ -30,6 +30,7 @@ public class CharacterCD : MonoBehaviour
     [SerializeField] public float spacing = 0.5f;
     public Station brokeStation;
     public Station currentBrokenStation;
+    public Gladness gladness;
     public Worker worker;
     public int capasitymoney = 100;
     public int speedmoney = 100;
@@ -37,6 +38,7 @@ public class CharacterCD : MonoBehaviour
     public int WorkerCapacityMoney = 100;
     public double currentMoney;
     public TextMeshProUGUI currentMoneyText;
+    public TextMeshProUGUI currentGladnessText;
     public TextMeshProUGUI currentMoneyCapacity;
     public string ID;
     public string Name;
@@ -124,12 +126,12 @@ public class CharacterCD : MonoBehaviour
                 {
 
                    
-                    if(carryCola.Count>0)
+                    if(carryCola.Count>0&& putFood.station.currentCustomer.x==1)
                     {
                         putFood.AddPutCola();
                         RemoveCarryCola();
                     }
-                    else if(carryHamburger.Count>0)
+                    else if(carryHamburger.Count>0 && putFood.station.currentCustomer.x == 0)
                     {
                         putFood.AddPutHamburger();
                         RemoveCarryHamburger();
@@ -177,6 +179,27 @@ public class CharacterCD : MonoBehaviour
                 other.GetComponent<NewStationLoading>().çapýr(false);
 
                 currentMoneyText.text = currentMoney.ToString();
+
+                    moneyElapsed = 0;
+
+                }
+
+            }
+
+        }
+        if (other.gameObject.tag == "NewScene")
+        {
+            moneyElapsed += Time.deltaTime;
+            if (moneyElapsed >= moneytimemax)
+            {
+
+
+                if (gladness.happyamount >= 0)
+                {
+
+                    other.GetComponent<NewScene>().çapýr(false);
+
+                    currentGladnessText.text = gladness.happyamount.ToString();
 
                     moneyElapsed = 0;
 
@@ -270,10 +293,11 @@ public class CharacterCD : MonoBehaviour
             var currentBrokenStation = other.gameObject.GetComponentInParent<Station>();
             if (!isActive)
             {
-
                 brokeStation = currentBrokenStation;
-            animator.SetTrigger("repair 0");
+                animator.SetTrigger("repair 0");
                 charactermove.canMove = false;
+                sLocation.SetActive(false);
+
 
             }
 
@@ -311,8 +335,10 @@ public class CharacterCD : MonoBehaviour
     {
         brokeStation.Repair();
         charactermove.canMove = true;
+        brokeStation = null;
+        sLocation.SetActive(true);
     }
-    
+
     public void AddCarryCD()
     {
 
@@ -378,6 +404,12 @@ public class CharacterCD : MonoBehaviour
     {
         saveData();
         currentMoneyText.text = currentMoney.ToString();
+        if(brokeStation != null)
+        {
+            transform.position = brokeStation.PCReapairPos.position;
+            gameObject.transform.LookAt(brokeStation.PCPos.position);
+        }
+
     }
     public void saveData()
     {

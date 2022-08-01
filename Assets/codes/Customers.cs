@@ -7,8 +7,7 @@ using UnityEngine.UI;
 
 public class Customers : MonoBehaviour
 {
-
-    public canteen canteen;
+    
     public Station currentStation;
     public  NavMeshAgent agent;
     public Animator animator;
@@ -377,8 +376,6 @@ public class Customers : MonoBehaviour
     }
     private IEnumerator progressBarFood()
     {
-
-
         if (!isProgressBarFoodStart)
         {
             isProgressBarFoodStart = true;
@@ -396,7 +393,7 @@ public class Customers : MonoBehaviour
                 Debug.Log(maxProgressBar - elapsed);
 
                 
-                if (customerspawner.putfood.putHamburger.Count > 0 || customerspawner.putfood.putCola.Count > 0)
+                if (currentStation.putFood.putHamburger.Count > 0 || currentStation.putFood.putCola.Count > 0)
 
                 {
                     ProgressBarFoods.SetActive(false);

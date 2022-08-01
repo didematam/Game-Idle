@@ -40,7 +40,7 @@ public class NewStationLoading : MonoBehaviour
         if (totalMoney >= 0)
         {
            
-            if (x.currentMoney <= 0)
+            if (x.currentMoney <= 0 && !isload)
             {
                 yield break;
             }

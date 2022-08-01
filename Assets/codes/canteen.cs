@@ -30,7 +30,7 @@ public class canteen : MonoBehaviour
         if (totalMoney >= 0)
         {
 
-            if (x.currentMoney <= 0)
+            if (x.currentMoney <= 0 && !isload)
             {
                 yield break;
             }
@@ -55,6 +55,7 @@ public class canteen : MonoBehaviour
 
             if (paidMoney >= totalMoney)
             {
+                PlayerPrefs.SetFloat(ID + Name + "paidmoney ", paidMoney);
                 StopCoroutine(opeenCanteen(false));
                 Debug.Log("0 oldu");
 

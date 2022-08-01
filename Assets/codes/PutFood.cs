@@ -6,7 +6,7 @@ using System.Linq;
 
 public class PutFood : MonoBehaviour
 {
-    public Customers customer;
+    public Station station;
     public List<GameObject> putHamburger;
     public List<GameObject> putCola;
     public GameObject HamburgerObject;

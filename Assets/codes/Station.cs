@@ -10,6 +10,8 @@ public class Station : MonoBehaviour
     public Transform movePositionTransform;
     public Transform exit;
     public Transform Monitor;
+    public Transform PCReapairPos;
+    public Transform PCPos;
     public PutCD putcd;
     public PutFood putFood;
     public Money money;
@@ -78,7 +80,7 @@ public class Station : MonoBehaviour
     {
        
         currLevel = 1;
-        maxTime = Random.Range(5, 10);
+        maxTime = Random.Range(10, 50);
         smokeBreak.SetActive(false);
 
     }

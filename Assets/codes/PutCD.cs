@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PutCD : MonoBehaviour
 {
-    public Customers customer;
+    public Station station;
     public List<GameObject> putCD;
     public GameObject spawnObject;
     public GameObject spawnLocation;

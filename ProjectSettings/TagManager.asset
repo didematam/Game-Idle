@@ -19,6 +19,8 @@ TagManager:
   - PutFoodLocation
   - BrokeStation
   - BreakWorker
+  - Trash
+  - NewScene
   layers:
   - Default
   - TransparentFX

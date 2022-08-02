@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
 using TMPro;
+using System;
 
 public class Worker : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class Worker : MonoBehaviour
     {
        
         carryCD = new List<GameObject>();
-        breakTimeMax = Random.Range(10, 20);
+        breakTimeMax = UnityEngine.Random.Range(10, 20);
         brokeImage.SetActive(false);
     }
 
@@ -66,7 +67,7 @@ public class Worker : MonoBehaviour
 
 
 
-        if (other.gameObject.tag == "PutCDLocation")
+        if (other.gameObject.tag == "PutCDLocation" && selectedStation.putcd == other.gameObject.GetComponent<PutCD>())
         {
             elapsed += Time.deltaTime;
             if (elapsed >= timemax)
@@ -159,10 +160,11 @@ public class Worker : MonoBehaviour
         {
             if(selectedStation == null && selectedStationBreak==null  )
             {
-              selectedStationBreak = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.currentCustomer==null ).FirstOrDefault();
+              selectedStationBreak = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.currentCustomer==null && x.breakWorker == null).FirstOrDefault();
                if(selectedStationBreak != null)
                 {
-                       agent.destination=selectedStationBreak.movePositionTransform.position;
+                    agent.destination=selectedStationBreak.movePositionTransform.position;
+                    selectedStationBreak.breakWorker = this;
                     return;
                 }
             }
@@ -175,41 +177,54 @@ public class Worker : MonoBehaviour
             breakElapsed += Time.deltaTime;
         }
 
-        if (selectedStation == null )
+        if (!brokeImage.activeInHierarchy)
         {
-            selectedStation = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.putcd.putCD.Count == 0).OrderByDescending(x => x.putcd.putCD.Count).FirstOrDefault();
-            return;
-        }
-        else if (selectedStation != null)
-        {
-            if (carryCD.Count < carrylimit && !onWay)
+
+            if (selectedStation == null)
             {
-                agent.destination = collectCD.position;
+                selectedStation = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.putcd.putCD.Count == 0 && x.currentWorker == null).OrderBy(x => Guid.NewGuid()).FirstOrDefault();
                 return;
             }
-
-
-            else if (carryCD.Count == carrylimit || selectedStation.putcd.putCD.Count != selectedStation.putcd.putLimit)
+            else if (selectedStation != null)
             {
-                onWay = true;
-                agent.destination = selectedStation.putcd.WorkerPutCD.transform.position;
-                return;
-            }
-            else if (carryCD.Count == 0 || selectedStation.putcd.putCD.Count == selectedStation.putcd.putLimit)
-            {
-                agent.destination = WorkerSpawner.waiting.position;
-                onWay = false;
-                selectedStation = null;
-                for (int i = 0; i < carryCD.Count; i++)
+                if (carryCD.Count < carrylimit && !onWay)
                 {
-                    RemoveCarryCD();
+                    agent.destination = collectCD.position;
+                    return;
                 }
 
+                else if (carryCD.Count == 0 || selectedStation.putcd.putCD.Count == selectedStation.putcd.putLimit)
+                {
+                    agent.destination = WorkerSpawner.waiting.position;
+                    onWay = false;
+                    selectedStation.currentWorker = null;
+                    selectedStation = null;
+                    for (int i = 0; i < carryCD.Count; i++)
+                    {
+                        RemoveCarryCD();
+                    }
+
+                }
+                else if (carryCD.Count == carrylimit || selectedStation.putcd.putCD.Count != selectedStation.putcd.putLimit)
+                {
+                    onWay = true;
+                    agent.destination = selectedStation.putcd.WorkerPutCD.transform.position;
+                    selectedStation.currentWorker = this;
+                    return;
+                }
+
+
             }
 
         }
+        else
+        {
+            agent.SetDestination(transform.position);
+            selectedStation = null;
+            onWay = false;
 
-          
+        }
+
     }
 
 

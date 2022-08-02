@@ -166,7 +166,6 @@ public class Customers : MonoBehaviour
             {
                 progressBroke = progressBarBroke();
                 StartCoroutine(progressBroke);
-                ProgressBarBroke.SetActive(true);
                 
                 yield return null;
             }
@@ -212,7 +211,7 @@ public class Customers : MonoBehaviour
                 
              
                 animator.SetBool("sit", false);
-                customerspawner.openPCScreen.SetActive(false);
+                currentStation.openPCScreen.SetActive(false);
                 
                 HappyFace.SetActive(true);
                 agent.destination = currentStation.exit.position;
@@ -238,7 +237,8 @@ public class Customers : MonoBehaviour
          
 
             animator.SetBool("sit", true);
-         
+            currentStation.openPCScreen.SetActive(true);
+
             StartCoroutine(uptadetime());
         }
     }
@@ -283,7 +283,7 @@ public class Customers : MonoBehaviour
                     AngryFace.SetActive(true);
                     animator.SetBool("sit", false);
 
-                    customerspawner.openPCScreen.SetActive(false);
+                    currentStation.openPCScreen.SetActive(false);
                     ProgressBar.SetActive(false);
                         agent.destination = currentStation.exit.position;
                         isDestroy = true;
@@ -345,7 +345,7 @@ public class Customers : MonoBehaviour
                     currentStation.Gladness.RemoveGladness(5);
                     AngryFace.SetActive(true);
                     animator.SetBool("sit", false);
-                    customerspawner.openPCScreen.SetActive(false);
+                    currentStation.openPCScreen.SetActive(false);
 
                     ProgressBarBroke.SetActive(false);
                     agent.destination = currentStation.exit.position;

@@ -54,7 +54,7 @@ public class CharacterCD : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "CDLocation")
+        if (other.gameObject.tag == "CDLocation" )
         {
             elapsed += Time.deltaTime;
             if (elapsed >= timemax)
@@ -166,7 +166,7 @@ public class CharacterCD : MonoBehaviour
 
             }
         }
-        if (other.gameObject.tag == "NewStation")
+        if (other.gameObject.tag == "NewStation" && !animator.GetBool("running"))
         {
             moneyElapsed += Time.deltaTime;
             if (moneyElapsed >= moneytimemax)
@@ -187,7 +187,7 @@ public class CharacterCD : MonoBehaviour
             }
 
         }
-        if (other.gameObject.tag == "NewScene")
+        if (other.gameObject.tag == "NewScene" && !animator.GetBool("running"))
         {
             moneyElapsed += Time.deltaTime;
             if (moneyElapsed >= moneytimemax)
@@ -209,7 +209,7 @@ public class CharacterCD : MonoBehaviour
 
         }
 
-        if (other.gameObject.tag == "OpenCanteen")
+        if (other.gameObject.tag == "OpenCanteen" && !animator.GetBool("running"))
         {
                 moneyElapsed += Time.deltaTime;
                 if (moneyElapsed >= moneytimemax)
@@ -276,7 +276,7 @@ public class CharacterCD : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Upgrade")
+        if (other.gameObject.tag == "Upgrade" && !animator.GetBool("running"))
         {
             if (!isActive)
             {
@@ -308,7 +308,7 @@ public class CharacterCD : MonoBehaviour
         {
 
             var currentBrokenStation = other.gameObject.GetComponentInParent<Station>();
-            if (!isActive && currentBrokenStation.currentWorker!=null)
+            if (!isActive && currentBrokenStation.breakWorker!=null)
             {
 
                 this.currentBrokenStation = currentBrokenStation;
@@ -326,10 +326,14 @@ public class CharacterCD : MonoBehaviour
     public void angry()
     {
         charactermove.canMove = true;
-        currentBrokenStation.currentWorker.animator.SetTrigger("StandUp");
+        currentBrokenStation.breakWorker.animator.SetTrigger("StandUp");
         worker.brokeImage.SetActive(false);
-        currentBrokenStation.currentWorker.breakElapsed = 0;
-        currentBrokenStation.currentWorker = null;
+        currentBrokenStation.breakWorker.breakElapsed = 0;
+        currentBrokenStation.breakWorker.selectedStationBreak = null;
+        currentBrokenStation.breakWorker.brokeImage.SetActive(false);
+        currentBrokenStation.breakWorker.agent.SetDestination(currentBrokenStation.breakWorker.WorkerSpawner.waiting.position);
+        currentBrokenStation.breakWorker = null;
+
     }
  public void repair()
     {

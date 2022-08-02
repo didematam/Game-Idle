@@ -18,6 +18,7 @@ public class Station : MonoBehaviour
     public CustomerSpawner customerSpawner;
     public Customers currentCustomer;
     public Worker currentWorker;
+    public Worker breakWorker;
     public CharacterCD character;
     public NewStationLoading newStationLoading;
     public Buttons Buttons;
@@ -68,8 +69,6 @@ public class Station : MonoBehaviour
           
             currLevel =2;
             setLevel();
-            remananingUpgradePc = 3-1;
-            remananingUpgradePcText.text = remananingUpgradePc.ToString();
 
         }
 

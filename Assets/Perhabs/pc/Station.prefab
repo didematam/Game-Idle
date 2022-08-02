@@ -119,7 +119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &511187785
 RectTransform:
   m_ObjectHideFlags: 0
@@ -226,7 +226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018263706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.59, y: 0, z: -1.1}
+  m_LocalPosition: {x: 0.862, y: 0, z: -0.605}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1046,7 +1046,7 @@ MonoBehaviour:
   level1: {fileID: 59266578818559147}
   level2: {fileID: 101788527}
   smokeBreak: {fileID: 2655405783968623062}
-  openPCScreen: {fileID: 1901050405}
+  openPCScreen: {fileID: 511187784}
   currLevel: 0
   upgradePctext: {fileID: 0}
   remananingUpgradePc: 0

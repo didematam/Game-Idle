@@ -26,6 +26,7 @@ public class Buttons : MonoBehaviour
     public int upgradeWorkerCapacityCount = 0;
     public int upgradeWorkerSpeedCount = 0;
     public int upgradepcCount = 0;
+    public GameObject upgradePCLock;
 
     void Start()
     {
@@ -38,14 +39,14 @@ public class Buttons : MonoBehaviour
 
         Upgrade.SetActive(false);
     }
-    public void hireWorker()
+    public void hireWorker(bool isload)
     {
 
         var Workerspawner = Workerspawners.GetComponent<WorkerSpawner>();
         if (Workerspawner.WorkerSpawns.Count < 5)
         {
-            hireWorkerCount++;
-            Workerspawner.addWorker();
+            if(Workerspawner.addWorker(isload))
+                hireWorkerCount++;
         }
     }
     public void upgradeCpacity()
@@ -90,6 +91,7 @@ public class Buttons : MonoBehaviour
             {
                 station.upgradestation();
             }
+            upgradePCLock.SetActive(true);
         }
     }
     //public void OnEnable()
@@ -158,18 +160,27 @@ public class Buttons : MonoBehaviour
             speed.interactable = false;
 
         }
-        if (stations.WorkerSpawner.WorkerSpawns.Count == 0)
+        if (stations.WorkerSpawner.WorkerSpawns.Count != 0 )
         {
-            workerspeed.interactable = false;
-            workerCapacity.interactable = false;
 
+            if(stations.character.currentMoney < stations.character.WorkerSpeedMoney)
+                workerspeed.interactable = false;
+            else
+                workerspeed.interactable = true; 
+            
+            if (stations.character.currentMoney < stations.character.WorkerCapacityMoney)
+                workerCapacity.interactable = false;
+            else
+                workerCapacity.interactable = true;
+            
         }
-        if (stations.WorkerSpawner.WorkerSpawns.Count != 0)
+        else
         {
-            workerspeed.interactable = true;
-            workerCapacity.interactable = true;
+            workerCapacity.interactable = false;
+            workerspeed.interactable = false;
         }
-        if(stations.level2.active==true)
+
+        if (stations.level2.active==true)
         {
             pc.interactable=false;
         }
@@ -196,11 +207,7 @@ public class Buttons : MonoBehaviour
         upgradeWorkerCapacityCount =  PlayerPrefs.GetInt(ID + Name + "upgradeWorkerCapacityCount ", upgradeWorkerCapacityCount);
         upgradepcCount =  PlayerPrefs.GetInt(ID + Name + "upgradepcCount ", upgradepcCount);
 
-        for(int i = 0; i < hireWorkerCount; i++)
-        {
-            hireWorker();
-            hireWorkerCount--;
-        }
+       
         for (int i = 0; i < upgradeSpeedCount; i++)
         {
             upgradeSpeed();
@@ -215,6 +222,11 @@ public class Buttons : MonoBehaviour
         {
             upgradeWorkerCapacity();
             upgradeWorkerCapacityCount--;
+        }
+        for (int i = 0; i < hireWorkerCount; i++)
+        {
+            hireWorker(true);
+            hireWorkerCount--;
         }
         for (int i = 0; i < upgradepcCount; i++)
         {

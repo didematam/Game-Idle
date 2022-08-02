@@ -65,6 +65,7 @@ public class NewStationLoading : MonoBehaviour
            
             if(paidMoney >= totalMoney)
             {
+                saveData();
                 StopCoroutine(uptadeMoney(false));
                 Debug.Log("0 oldu");
 

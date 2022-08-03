@@ -187,6 +187,27 @@ public class CharacterCD : MonoBehaviour
             }
 
         }
+        if (other.gameObject.tag == "2.SceneStations" && !animator.GetBool("running"))
+        {
+            moneyElapsed += Time.deltaTime;
+            if (moneyElapsed >= moneytimemax)
+            {
+
+
+                if (currentMoney >= 0)
+                {
+
+                    other.GetComponent<OtherNewStations>().çapýr(false);
+
+                    currentMoneyText.text = currentMoney.ToString();
+
+                    moneyElapsed = 0;
+
+                }
+
+            }
+
+        }
         if (other.gameObject.tag == "NewScene" && !animator.GetBool("running"))
         {
             moneyElapsed += Time.deltaTime;

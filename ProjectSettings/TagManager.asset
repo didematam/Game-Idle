@@ -21,6 +21,7 @@ TagManager:
   - BreakWorker
   - Trash
   - NewScene
+  - 2.SceneStations
   layers:
   - Default
   - TransparentFX

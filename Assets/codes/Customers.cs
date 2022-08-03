@@ -30,7 +30,8 @@ public class Customers : MonoBehaviour
     public GameObject AngryFace;
     public GameObject Cola;
     public GameObject Hamburger;
- 
+  
+   
     public int a;
     public int x;
     bool isProgressBarStart;
@@ -40,6 +41,8 @@ public class Customers : MonoBehaviour
     IEnumerator progressFood;
     IEnumerator progressBroke;
     bool isDestroy;
+  
+    
    
     //bool isStartForFood 
 
@@ -173,18 +176,18 @@ public class Customers : MonoBehaviour
             ProgressBarBroke.SetActive(false);
 
 
-            if (customerspawner.putfood.putHamburger.Count != 0 && a==1)
+            if (currentStation.putFood.putHamburger.Count != 0 && a==1)
             {
-                customerspawner.putfood.RemovePutHamburger();
+                a = 0;
                 Hamburger.SetActive(false);
                 currentStation.Gladness.addgladness(3);
                 currentStation.money.AddMoney(50);
             }
            
 
-            if (customerspawner.putfood.putCola.Count != 0 && a == 1)
+            if (currentStation.putFood.putCola.Count != 0 && a == 1)
             {
-                customerspawner.putfood.RemovePutCola();
+                a = 0;
                 Cola.SetActive(false);
                 currentStation.Gladness.addgladness(3);
                 currentStation.money.AddMoney(50);
@@ -196,11 +199,27 @@ public class Customers : MonoBehaviour
 
             if (currenttime <= 0)
             {
-                
-               
 
-                
-               
+
+                if (currentStation.putFood.putHamburger.Count != 0 )
+                {
+                    currentStation.putFood.RemovePutHamburger();
+                    Hamburger.SetActive(false);
+                    
+                   
+                }
+
+
+                if (currentStation.putFood.putCola.Count != 0  )
+                {
+                    currentStation.putFood.RemovePutCola();
+                    Cola.SetActive(false);
+                    
+                   
+                }
+
+
+
                 currentStation.Gladness.addgladness(5);
               
 
@@ -212,7 +231,13 @@ public class Customers : MonoBehaviour
              
                 animator.SetBool("sit", false);
                 currentStation.openPCScreen.SetActive(false);
-                
+                if (currentStation.joystick != null)
+                {
+                    currentStation.joystick.transform.position = currentStation.oldJoystick.transform.position;
+
+                }
+
+               
                 HappyFace.SetActive(true);
                 agent.destination = currentStation.exit.position;
                 isDestroy = true;
@@ -225,8 +250,8 @@ public class Customers : MonoBehaviour
             
         }
     }
-
     
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Target" && Vector3.Distance(agent.destination, transform.position) < 2f)
@@ -234,9 +259,15 @@ public class Customers : MonoBehaviour
             gameObject.transform.position = currentStation.movePositionTransform.position;
             transform.LookAt(currentStation.Monitor);
 
-         
+         if(currentStation.joystick != null)
+            {
+                currentStation. joystick.transform.position=currentStation.newJoystick.transform.position;
+               
 
-            animator.SetBool("sit", true);
+
+            }
+
+            animator.SetBool(currentStation.CustomerAnimasion, true);
             currentStation.openPCScreen.SetActive(true);
 
             StartCoroutine(uptadetime());
@@ -282,7 +313,11 @@ public class Customers : MonoBehaviour
                     currentStation.Gladness.RemoveGladness(5);
                     AngryFace.SetActive(true);
                     animator.SetBool("sit", false);
+                    if (currentStation.joystick != null)
+                    {
+                        currentStation.joystick.transform.position = currentStation.oldJoystick.transform.position;
 
+                    }
                     currentStation.openPCScreen.SetActive(false);
                     ProgressBar.SetActive(false);
                         agent.destination = currentStation.exit.position;
@@ -342,11 +377,30 @@ public class Customers : MonoBehaviour
 
                 if (maxProgressBar - elapsed <= 0.33)
                 {
+
+                    if (currentStation.putFood.putHamburger.Count != 0 && a == 1)
+                    {
+                        currentStation.putFood.RemovePutHamburger();
+                        Hamburger.SetActive(false);
+                        
+                    }
+
+
+                    if (currentStation.putFood.putCola.Count != 0 && a == 1)
+                    {
+                        currentStation.putFood.RemovePutCola();
+                        Cola.SetActive(false);
+                        
+                    }
                     currentStation.Gladness.RemoveGladness(5);
                     AngryFace.SetActive(true);
                     animator.SetBool("sit", false);
                     currentStation.openPCScreen.SetActive(false);
+                    if (currentStation.joystick != null)
+                    {
+                        currentStation.joystick.transform.position = currentStation.oldJoystick.transform.position;
 
+                    }
                     ProgressBarBroke.SetActive(false);
                     agent.destination = currentStation.exit.position;
                     isDestroy = true;

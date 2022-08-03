@@ -13,7 +13,6 @@ public class CustomerSpawner : MonoBehaviour
     public GameObject openPCScreen;
     public canteen canteen;
     public Food food;
-    public PutFood putfood;
     void Start()
     {
 

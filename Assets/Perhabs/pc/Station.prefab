@@ -573,7 +573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &182479121194001998
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1037,6 +1037,7 @@ MonoBehaviour:
   customerSpawner: {fileID: 0}
   currentCustomer: {fileID: 0}
   currentWorker: {fileID: 0}
+  breakWorker: {fileID: 0}
   character: {fileID: 0}
   newStationLoading: {fileID: 0}
   Buttons: {fileID: 0}
@@ -1053,6 +1054,8 @@ MonoBehaviour:
   remananingUpgradePcText: {fileID: 0}
   maxTime: 0
   currTime: 0
+  standUPanimaionName: 
+  CanBroke: 1
   isBroke: 0
 --- !u!95 &1613377856
 Animator:

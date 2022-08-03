@@ -12,6 +12,9 @@ public class Station : MonoBehaviour
     public Transform Monitor;
     public Transform PCReapairPos;
     public Transform PCPos;
+    public Transform newJoystick;
+    public Transform oldJoystick;
+    public GameObject joystick;
     public PutCD putcd;
     public PutFood putFood;
     public Money money;
@@ -35,9 +38,12 @@ public class Station : MonoBehaviour
     public TextMeshProUGUI remananingUpgradePcText;
     public float maxTime;
     public float currTime;
-   
 
+    public string CustomerAnimasion;
+    public bool CanBroke =false;
    public bool isBroke;
+
+
     public void BrokeTime()
     {
         if (currTime < maxTime && !isBroke)
@@ -62,7 +68,7 @@ public class Station : MonoBehaviour
    
     public void upgradestation()
     {
-        if (WorkerSpawner.character.currentMoney >= Stationmoney)
+        if (WorkerSpawner.character.currentMoney >= Stationmoney && CanBroke)
         {
             WorkerSpawner.character.currentMoney -= Stationmoney;
             Stationmoney *= 2;
@@ -103,6 +109,9 @@ public class Station : MonoBehaviour
     
     void Update()
     {
-        BrokeTime();
+        if (CanBroke)
+        {
+            BrokeTime();
+        }
     }
 }

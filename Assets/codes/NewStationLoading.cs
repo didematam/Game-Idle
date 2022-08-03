@@ -17,7 +17,7 @@ public class NewStationLoading : MonoBehaviour
   public AllStations allStations;
     public string ID;
     public string name;
-
+    
 
 
     public TextMeshProUGUI moneyText;
@@ -32,7 +32,7 @@ public class NewStationLoading : MonoBehaviour
       
         
     }
-
+ 
     private IEnumerator uptadeMoney(bool isload)
     {
         var x = CharacterCD.GetComponent<CharacterCD>();

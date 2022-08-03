@@ -856,6 +856,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1375533424540250775}
+  - component: {fileID: 8133862319787916725}
   m_Layer: 0
   m_Name: uploads_files_2562183_Game+Machine+Cabine
   m_TagString: Untagged
@@ -872,7 +873,7 @@ Transform:
   m_GameObject: {fileID: 1755613237108647981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1.6368768, y: 7.748518, z: 3.4683}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6742664228171368290}
@@ -903,6 +904,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8133862319787916725
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755613237108647981}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.26509964, y: 0.42175868, z: 0.16515018}
+  m_Center: {x: 0.13065693, y: 0.036072236, z: 0.015682751}
 --- !u!1 &1939676448201034307
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class canteen : MonoBehaviour
     public float paidMoney;
     [SerializeField] private Image uiFill;
     public GameObject opencanteen;
+    public GameObject opencanteen2;
     public GameObject CloseCanvas;
 
     public string ID;
@@ -60,7 +61,8 @@ public class canteen : MonoBehaviour
                 Debug.Log("0 oldu");
 
 
-                opencanteen.active = true;
+                opencanteen.SetActive(true);
+                opencanteen2.SetActive(true);
 
                 CloseCanvas.SetActive(false);
 

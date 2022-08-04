@@ -63,6 +63,7 @@ public class NewScene : MonoBehaviour
 
             if (paidGladness >= totalGladness)
             {
+                saveData();
                 StopCoroutine(uptadeGladness(false));
                 Debug.Log("0 oldu");
 

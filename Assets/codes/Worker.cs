@@ -67,7 +67,7 @@ public class Worker : MonoBehaviour
 
 
 
-        if (other.gameObject.tag == "PutCDLocation" && selectedStation.putcd == other.gameObject.GetComponent<PutCD>())
+        if (other.gameObject.tag == "PutCDLocation" && selectedStation!=null&& selectedStation.putcd == other.gameObject.GetComponent<PutCD>())
         {
             elapsed += Time.deltaTime;
             if (elapsed >= timemax)
@@ -135,6 +135,8 @@ public class Worker : MonoBehaviour
         desicion();
         brokeImage.transform.LookAt(Camera.main.transform.position);
     }
+
+ 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Target" && Vector3.Distance(agent.destination, transform.position) < 2f)
@@ -161,16 +163,16 @@ public class Worker : MonoBehaviour
             if(selectedStation == null && selectedStationBreak==null  )
             {
               selectedStationBreak = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.currentCustomer==null && x.breakWorker == null).FirstOrDefault();
-               if(selectedStationBreak != null)
-                {
-                    agent.destination=selectedStationBreak.movePositionTransform.position;
-                    selectedStationBreak.breakWorker = this;
-                    return;
-                }
+              
             }
-         
-            
-            
+            if (selectedStationBreak != null)
+            {
+                agent.destination = selectedStationBreak.movePositionTransform.position;
+                selectedStationBreak.breakWorker = this;
+                return;
+            }
+
+
         }
         else
         {

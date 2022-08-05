@@ -1031,6 +1031,9 @@ MonoBehaviour:
   Monitor: {fileID: 6099924332151577695}
   PCReapairPos: {fileID: 1018263707}
   PCPos: {fileID: 114567671}
+  newJoystick: {fileID: 0}
+  oldJoystick: {fileID: 0}
+  joystick: {fileID: 0}
   putcd: {fileID: 7715065504671092420}
   putFood: {fileID: 449748087}
   money: {fileID: 117255667}
@@ -1054,7 +1057,7 @@ MonoBehaviour:
   remananingUpgradePcText: {fileID: 0}
   maxTime: 0
   currTime: 0
-  standUPanimaionName: 
+  CustomerAnimasion: 
   CanBroke: 1
   isBroke: 0
 --- !u!95 &1613377856

@@ -295,12 +295,18 @@ public class CharacterCD : MonoBehaviour
 
 
     }
+    private void OnTriggerExit(Collider other)
+    {
+        
+        isActive= false;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Upgrade" && !animator.GetBool("running"))
         {
             if (!isActive)
             {
+                isActive = true;
                 Upgrade.SetActive(true);
 
             }
@@ -314,6 +320,7 @@ public class CharacterCD : MonoBehaviour
             var currentBrokenStation = other.gameObject.GetComponentInParent<Station>();
             if (!isActive)
             {
+                isActive = true;
                 brokeStation = currentBrokenStation;
                 animator.SetTrigger("repair 0");
                 charactermove.canMove = false;
@@ -331,7 +338,7 @@ public class CharacterCD : MonoBehaviour
             var currentBrokenStation = other.gameObject.GetComponentInParent<Station>();
             if (!isActive && currentBrokenStation.breakWorker!=null)
             {
-
+                isActive = true;
                 this.currentBrokenStation = currentBrokenStation;
                 animator.SetTrigger("angry");
                 
@@ -354,6 +361,8 @@ public class CharacterCD : MonoBehaviour
         currentBrokenStation.breakWorker.brokeImage.SetActive(false);
         currentBrokenStation.breakWorker.agent.SetDestination(currentBrokenStation.breakWorker.WorkerSpawner.waiting.position);
         currentBrokenStation.breakWorker = null;
+        currentBrokenStation = null;
+
 
     }
  public void repair()
@@ -433,6 +442,13 @@ public class CharacterCD : MonoBehaviour
         {
             transform.position = brokeStation.PCReapairPos.position;
             gameObject.transform.LookAt(brokeStation.PCPos.position);
+        }
+        if (currentBrokenStation != null)
+        {
+            currentBrokenStation.isBroke = false;
+            currentBrokenStation.smokeBreak.SetActive(false);
+            transform.position = currentBrokenStation.PCReapairPos.position;
+            gameObject.transform.LookAt(currentBrokenStation.PCPos.position);
         }
 
     }

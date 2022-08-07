@@ -16,6 +16,9 @@ public class CharacterCD : MonoBehaviour
     [SerializeField] public GameObject sObject;
     public AudioSource cashSound;
     public AudioSource CDSound;
+    public AudioSource repairSound;
+    public AudioSource colaSound;
+    public AudioSource hamburgerSound;
     [SerializeField] public GameObject sLocation;
     public CharacterMove charactermove;
     [SerializeField] public GameObject hamburgerObject;
@@ -136,14 +139,16 @@ public class CharacterCD : MonoBehaviour
                    
                     if(carryCola.Count>0&& putFood.station.currentCustomer.x==1)
                     {
+                        colaSound.Play();
                         putFood.AddPutCola();
-                        CDSound.Play();
+                       
                         RemoveCarryCola();
                     }
                     else if(carryHamburger.Count>0 && putFood.station.currentCustomer.x == 0)
                     {
+                        hamburgerSound.Play();
                         putFood.AddPutHamburger();
-                        CDSound.Play();
+                        
                         RemoveCarryHamburger();
                     }
                    
@@ -334,6 +339,7 @@ public class CharacterCD : MonoBehaviour
                 isActive = true;
                 brokeStation = currentBrokenStation;
                 animator.SetTrigger("repair 0");
+                repairSound.Play();
                 charactermove.canMove = false;
                 sLocation.SetActive(false);
 

@@ -9,10 +9,8 @@ public class Options : MonoBehaviour
   public Animator animator;
     public GameObject OpenSoundImage;
     public GameObject CloseSoundImage;
-    public GameObject cashSound;
-    public GameObject CDsound;
-    public GameObject buttonSound;
-
+    public GameObject sounds;
+   
     bool isOpen;
     bool isSoundClose;
     void Start()
@@ -48,9 +46,8 @@ public class Options : MonoBehaviour
         {
             OpenSoundImage.SetActive(false);
             CloseSoundImage.SetActive(true);
-            CDsound.SetActive(false);
-            buttonSound.SetActive(false);
-            cashSound.SetActive(false);
+            sounds.SetActive(false);
+            
             isSoundClose = true;
 
         }
@@ -60,9 +57,8 @@ public class Options : MonoBehaviour
 
             OpenSoundImage.SetActive(true);
             CloseSoundImage.SetActive(false);
-            CDsound.SetActive(true);
-            buttonSound.SetActive(true);
-            cashSound.SetActive(true);
+
+            sounds.SetActive(true);
             isSoundClose = false;
         }
     }

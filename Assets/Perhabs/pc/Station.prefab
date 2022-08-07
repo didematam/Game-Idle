@@ -826,6 +826,8 @@ MonoBehaviour:
   putLimit: 5
   WorkerPutCD: {fileID: 5965041642848235122}
   spacing: 0.05
+  ID: 1
+  Name: putCD
 --- !u!1 &6315003367281584609
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,9 +1059,10 @@ MonoBehaviour:
   remananingUpgradePcText: {fileID: 0}
   maxTime: 0
   currTime: 0
-  CustomerAnimasion: 
+  CustomerAnimasion: sit
   CanBroke: 1
   isBroke: 0
+  gameMashine: 0
 --- !u!95 &1613377856
 Animator:
   serializedVersion: 4

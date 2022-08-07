@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 public class PutCD : MonoBehaviour
 {
@@ -12,11 +13,14 @@ public class PutCD : MonoBehaviour
     public int putLimit=5;
     public Transform WorkerPutCD;
     public float spacing;
+    public string ID;
+    public string Name;
 
 
 
     void Start()
     {
+        loadData();
         putCD = new List<GameObject>();
     }
         
@@ -42,6 +46,21 @@ public class PutCD : MonoBehaviour
     }
     void Update()
     {
+        saveData();
+    }
+    public void saveData()
+    {
+        PlayerPrefs.SetInt(ID + Name + "putCD", putCD.Count);
+       
+      
+    }
+    public void loadData()
+    {
+        var x = PlayerPrefs.GetInt(ID + Name + "putCD", putCD.Count);
+        for (int i = 0; i < x; i++)
+        {
+            AddPutCD();
+        }
        
     }
 }

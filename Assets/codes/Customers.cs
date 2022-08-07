@@ -41,6 +41,7 @@ public class Customers : MonoBehaviour
     IEnumerator progressFood;
     IEnumerator progressBroke;
     bool isDestroy;
+    
   
     
    
@@ -76,6 +77,10 @@ public class Customers : MonoBehaviour
     private IEnumerator uptadetime()
 
     {
+        if(!currentStation.gameMashine)
+        {
+
+        
         while (currentStation.smokeBreak.activeInHierarchy)
         {
             progressBroke = progressBarBroke();
@@ -83,10 +88,13 @@ public class Customers : MonoBehaviour
             yield return null;
         }
 
-        
-        
-       
-        while (currentStation.putcd.putCD.Count == 0)
+        }
+        if (!currentStation.gameMashine)
+        {
+            
+
+
+            while (currentStation.putcd.putCD.Count == 0)
         {
 
             progress = progressBar();
@@ -100,9 +108,9 @@ public class Customers : MonoBehaviour
 
         currentStation.putcd.RemovePutCD();
 
-
-
+        }
        
+
         var randomProgressFoodTime = Random.Range(5, currenttime);
         bool isStartForFood = false;
         
@@ -115,7 +123,7 @@ public class Customers : MonoBehaviour
 
 
 
-            if(currenttime<= randomProgressFoodTime && !isStartForFood )
+            if(currenttime<= randomProgressFoodTime && !isStartForFood && !currentStation.gameMashine)
             {
                 isStartForFood=true;
                 if (!customerspawner.canteen.opencanteen.activeInHierarchy)
@@ -164,7 +172,10 @@ public class Customers : MonoBehaviour
 
             currenttime -= Time.deltaTime;
            
+            if(!currentStation.gameMashine)
+            {
 
+           
             while (currentStation.smokeBreak.activeInHierarchy)
             {
                 progressBroke = progressBarBroke();
@@ -174,33 +185,40 @@ public class Customers : MonoBehaviour
             }
            
             ProgressBarBroke.SetActive(false);
-
-
-            if (currentStation.putFood.putHamburger.Count != 0 && a==1)
-            {
-                a = 0;
-                Hamburger.SetActive(false);
-                currentStation.Gladness.addgladness(3);
-                currentStation.money.AddMoney(50);
             }
-           
-
-            if (currentStation.putFood.putCola.Count != 0 && a == 1)
+            if (!currentStation.gameMashine)
             {
-                a = 0;
-                Cola.SetActive(false);
-                currentStation.Gladness.addgladness(3);
-                currentStation.money.AddMoney(50);
+
+
+
+                if (currentStation.putFood.putHamburger.Count != 0 && a == 1)
+                {
+                    a = 0;
+                    Hamburger.SetActive(false);
+                    currentStation.Gladness.addgladness(3);
+                    currentStation.money.AddMoney(50);
+                }
+
+
+                if (currentStation.putFood.putCola.Count != 0 && a == 1)
+                {
+                    a = 0;
+                    Cola.SetActive(false);
+                    currentStation.Gladness.addgladness(3);
+                    currentStation.money.AddMoney(50);
+                }
+
+
             }
-
-
-
            
 
             if (currenttime <= 0)
             {
 
+                if(!currentStation.gameMashine)
+                    {
 
+                
                 if (currentStation.putFood.putHamburger.Count != 0 )
                 {
                     currentStation.putFood.RemovePutHamburger();
@@ -210,26 +228,36 @@ public class Customers : MonoBehaviour
                 }
 
 
-                if (currentStation.putFood.putCola.Count != 0  )
+                if (currentStation.putFood.putCola.Count != 0 )
                 {
                     currentStation.putFood.RemovePutCola();
                     Cola.SetActive(false);
                     
                    
                 }
+                }
+                if (currentStation.gameMashine)
+                {
+                    currentStation.Gladness.addgladness(5);
 
 
+                    currentStation.money.AddMoney((int)maxtime * 7);
+                }
+                else
+                {
+                    currentStation.Gladness.addgladness(5);
 
-                currentStation.Gladness.addgladness(5);
-              
 
-                currentStation.money.AddMoney((int)maxtime * 5);
+                    currentStation.money.AddMoney((int)maxtime * 5);
+                }
+
+                
 
                 
                 currentStation.currentCustomer = null;
                 
              
-                animator.SetBool("sit", false);
+                animator.SetBool(currentStation.CustomerAnimasion, false);
                 currentStation.openPCScreen.SetActive(false);
                 if (currentStation.joystick != null)
                 {
@@ -312,7 +340,7 @@ public class Customers : MonoBehaviour
                     {
                     currentStation.Gladness.RemoveGladness(5);
                     AngryFace.SetActive(true);
-                    animator.SetBool("sit", false);
+                    animator.SetBool(currentStation.CustomerAnimasion, false);
                     if (currentStation.joystick != null)
                     {
                         currentStation.joystick.transform.position = currentStation.oldJoystick.transform.position;
@@ -394,7 +422,7 @@ public class Customers : MonoBehaviour
                     }
                     currentStation.Gladness.RemoveGladness(5);
                     AngryFace.SetActive(true);
-                    animator.SetBool("sit", false);
+                    animator.SetBool(currentStation.CustomerAnimasion, false);
                     currentStation.openPCScreen.SetActive(false);
                     if (currentStation.joystick != null)
                     {

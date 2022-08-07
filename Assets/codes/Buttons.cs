@@ -7,7 +7,7 @@ using TMPro;
 public class Buttons : MonoBehaviour
 {
     public GameObject Upgrade;
-
+    public AudioSource buttonAudio;
     public Station stations;
     public AllStations allstation;
     public GameObject Workerspawners;
@@ -38,10 +38,11 @@ public class Buttons : MonoBehaviour
     {
 
         Upgrade.SetActive(false);
+        buttonAudio.Play();
     }
     public void hireWorker(bool isload)
     {
-
+        buttonAudio.Play();
         var Workerspawner = Workerspawners.GetComponent<WorkerSpawner>();
         if (Workerspawner.WorkerSpawns.Count < 5)
         {
@@ -51,16 +52,19 @@ public class Buttons : MonoBehaviour
     }
     public void upgradeCpacity()
     {
+        buttonAudio.Play();
         upgradeCapacityCount++;
         stations.character.upgradeCDLimit();
     }
     public void upgradeSpeed()
     {
+        buttonAudio.Play();
         upgradeSpeedCount++;
         stations.charactermove.upgradeSpeed();
     }
     public void upgradeWorkerSpeed()
     {
+        buttonAudio.Play();
         var Workerspawner = Workerspawners.GetComponent<WorkerSpawner>();
         foreach (var worker in Workerspawner.WorkerSpawns)
         {
@@ -72,6 +76,7 @@ public class Buttons : MonoBehaviour
     }
     public void upgradeWorkerCapacity()
     {
+        buttonAudio.Play();
         var Workerspawner = Workerspawners.GetComponent<WorkerSpawner>();
        foreach (var worker in Workerspawner.WorkerSpawns)
         {
@@ -84,7 +89,8 @@ public class Buttons : MonoBehaviour
     }
     public void upgradepc()
     {
-        if(stations.currLevel != 2)
+        buttonAudio.Play();
+        if (stations.currLevel != 2)
         {
             upgradepcCount++;
             foreach(var station in allstation.Stations)
@@ -94,44 +100,7 @@ public class Buttons : MonoBehaviour
             upgradePCLock.SetActive(true);
         }
     }
-    //public void OnEnable()
-    //{
-    //    if (stations.character.currentMoney >= stations.character.capasitymoney)
-    //    {
-
-    //        capacity.interactable = true;
-
-
-    //    }
-    //    if (stations.character.currentMoney < stations.character.capasitymoney)
-    //    {
-    //        capacity.interactable = false;
-
-    //    }
-    //    if (stations.character.currentMoney >= stations.character.speedmoney)
-    //    {
-
-    //        speed.interactable = true;
-
-
-    //    }
-    //    if (stations.character.currentMoney < stations.character.speedmoney)
-    //    {
-    //        speed.interactable = false;
-
-    //    }
-    //    if (stations.WorkerSpawner.WorkerSpawns.Count == 0)
-    //    {
-    //        workerspeed.interactable = false;
-    //        workerCapacity.interactable = false;
-
-    //    }
-    //    if (stations.WorkerSpawner.WorkerSpawns.Count != 0)
-    //    {
-    //        workerspeed.interactable = true;
-    //        workerCapacity.interactable = true;
-    //    }
-    //}
+   
     void Update()
     {
         saveData();

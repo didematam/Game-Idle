@@ -14,6 +14,8 @@ public class CharacterCD : MonoBehaviour
     public List<GameObject> carryCola;
     public Animator animator;
     [SerializeField] public GameObject sObject;
+    public AudioSource cashSound;
+    public AudioSource CDSound;
     [SerializeField] public GameObject sLocation;
     public CharacterMove charactermove;
     [SerializeField] public GameObject hamburgerObject;
@@ -65,6 +67,7 @@ public class CharacterCD : MonoBehaviour
                 {
                     createdCD.RemoveCD();
                     AddCarryCD();
+                    CDSound.Play();
                 }
                 elapsed = 0;
             }
@@ -80,14 +83,17 @@ public class CharacterCD : MonoBehaviour
                 if (carryCD.Count > 0)
                 {
                     RemoveCarryCD();
+                    CDSound.Play();
                 }
                 if (carryCola.Count > 0)
                 {
                     RemoveCarryCola();
+                    CDSound.Play();
                 }
                 if (carryHamburger.Count > 0)
                 {
                     RemoveCarryHamburger();
+                    CDSound.Play();
                 }
                 elapsed = 0;
 
@@ -107,7 +113,9 @@ public class CharacterCD : MonoBehaviour
                 {
 
                     putedCD.AddPutCD();
+                    CDSound.Play();
                     RemoveCarryCD();
+
                 }
 
                 elapsed = 0;
@@ -129,11 +137,13 @@ public class CharacterCD : MonoBehaviour
                     if(carryCola.Count>0&& putFood.station.currentCustomer.x==1)
                     {
                         putFood.AddPutCola();
+                        CDSound.Play();
                         RemoveCarryCola();
                     }
                     else if(carryHamburger.Count>0 && putFood.station.currentCustomer.x == 0)
                     {
                         putFood.AddPutHamburger();
+                        CDSound.Play();
                         RemoveCarryHamburger();
                     }
                    
@@ -157,6 +167,7 @@ public class CharacterCD : MonoBehaviour
 
                     currentMoney += outMoney;
                     currentMoneyText.text = currentMoney.ToString();
+                    cashSound.Play();
 
 
 
@@ -262,8 +273,8 @@ public class CharacterCD : MonoBehaviour
 
                 if (carryHamburger.Count != foodlimit && carryCola.Count == 0 && carryCD.Count == 0)
                 {
-
-                     AddCarryHamburger();
+                    CDSound.Play();
+                    AddCarryHamburger();
                 }
 
                 elapsed = 0;               
@@ -282,7 +293,7 @@ public class CharacterCD : MonoBehaviour
 
                 if (carryCola.Count != foodlimit && carryCD.Count == 0 && carryHamburger.Count == 0 )
                 {
-
+                    CDSound.Play();
                     AddCarryCola();
                 }
 

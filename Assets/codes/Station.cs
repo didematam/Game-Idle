@@ -42,6 +42,7 @@ public class Station : MonoBehaviour
     public string CustomerAnimasion;
     public bool CanBroke =false;
    public bool isBroke;
+    public bool gameMashine = false;
 
 
     public void BrokeTime()
@@ -86,8 +87,12 @@ public class Station : MonoBehaviour
        
         currLevel = 1;
         maxTime = Random.Range(10, 50);
-        smokeBreak.SetActive(false);
+        if(!gameMashine)
+        {
 
+       
+        smokeBreak.SetActive(false);
+        }
     }
 
     public void setLevel()

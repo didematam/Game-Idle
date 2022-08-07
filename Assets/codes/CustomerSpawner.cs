@@ -12,6 +12,8 @@ public class CustomerSpawner : MonoBehaviour
     public GameObject CustomerSpawnLocation;
     public GameObject openPCScreen;
     public canteen canteen;
+    public AudioSource pcSound;
+    public AudioSource psSound;
     public Food food;
     void Start()
     {

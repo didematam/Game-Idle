@@ -43,6 +43,7 @@ public class Station : MonoBehaviour
     public bool CanBroke =false;
    public bool isBroke;
     public bool gameMashine = false;
+    public bool ps = false;
 
 
     public void BrokeTime()

@@ -261,6 +261,7 @@ public class Customers : MonoBehaviour
              
                 animator.SetBool(currentStation.CustomerAnimasion, false);
                 currentStation.openPCScreen.SetActive(false);
+                currentStation.OpenScreen.SetActive(false);
                 if (currentStation.joystick != null)
                 {
                     currentStation.joystick.transform.position = currentStation.oldJoystick.transform.position;
@@ -299,6 +300,7 @@ public class Customers : MonoBehaviour
 
             animator.SetBool(currentStation.CustomerAnimasion, true);
             currentStation.openPCScreen.SetActive(true);
+            currentStation.OpenScreen.SetActive(true);
 
             StartCoroutine(uptadetime());
         }
@@ -349,6 +351,7 @@ public class Customers : MonoBehaviour
 
                     }
                     currentStation.openPCScreen.SetActive(false);
+                    currentStation.OpenScreen.SetActive(false);
                     ProgressBar.SetActive(false);
                         agent.destination = currentStation.exit.position;
                         isDestroy = true;
@@ -426,6 +429,7 @@ public class Customers : MonoBehaviour
                     AngryFace.SetActive(true);
                     animator.SetBool(currentStation.CustomerAnimasion, false);
                     currentStation.openPCScreen.SetActive(false);
+                    currentStation.OpenScreen.SetActive(false);
                     if (currentStation.joystick != null)
                     {
                         currentStation.joystick.transform.position = currentStation.oldJoystick.transform.position;

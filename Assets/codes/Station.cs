@@ -18,6 +18,8 @@ public class Station : MonoBehaviour
     public Transform newJoystick;
     public Transform oldJoystick;
     public GameObject joystick;
+   
+    public GameObject OpenScreen;
     public PutCD putcd;
     public PutFood putFood;
     public Money money;

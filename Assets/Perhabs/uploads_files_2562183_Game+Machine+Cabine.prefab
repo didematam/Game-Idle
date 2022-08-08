@@ -1088,6 +1088,7 @@ MonoBehaviour:
   newJoystick: {fileID: 0}
   oldJoystick: {fileID: 0}
   joystick: {fileID: 0}
+  OpenScreen: {fileID: 5408859040674792734}
   putcd: {fileID: 0}
   putFood: {fileID: 0}
   money: {fileID: 1553345799}

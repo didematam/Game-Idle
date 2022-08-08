@@ -107,7 +107,7 @@ public class Worker : MonoBehaviour
     void Update()
     {
 
-        if (Vector3.Distance(agent.destination, transform.position) < 0.1f)
+        if (Vector3.Distance(agent.destination, transform.position) < 0.6f)
 
         {
             animator.SetBool("running", false);

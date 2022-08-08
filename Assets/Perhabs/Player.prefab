@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1703779783
 Transform:
   m_ObjectHideFlags: 0
@@ -978,6 +978,11 @@ MonoBehaviour:
   carryCola: []
   animator: {fileID: 7525153022593031957}
   sObject: {fileID: 4266766688687805187, guid: 6ef84cf4a2210b046925ba9d34cefe2f, type: 3}
+  cashSound: {fileID: 0}
+  CDSound: {fileID: 0}
+  repairSound: {fileID: 0}
+  colaSound: {fileID: 0}
+  hamburgerSound: {fileID: 0}
   sLocation: {fileID: 1703779782}
   charactermove: {fileID: 2295913787726632117}
   hamburgerObject: {fileID: 4809234952569351193, guid: 62b044e7c6bc9a042becdb42e46c5792, type: 3}

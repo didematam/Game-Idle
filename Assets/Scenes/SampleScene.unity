@@ -1716,7 +1716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyText: {fileID: 444796064}
   CharacterCD: {fileID: 549303960}
-  totalMoney: 100
+  totalMoney: 1000
   paidMoney: 0
   uiFill: {fileID: 746531721}
   opencanteen: {fileID: 2975964089797207867}
@@ -2181,7 +2181,7 @@ MonoBehaviour:
   customers: {fileID: 5543196562197503680, guid: bcbc95de303878c478ca556206042291, type: 3}
   happy: 0
   sad: 0
-  happyamount: 1000
+  happyamount: 0
   text: {fileID: 764106134}
   ID: 1
   Name: Gladness
@@ -2713,8 +2713,8 @@ MonoBehaviour:
   openStation: {fileID: 1626356315}
   CloseCanvas: {fileID: 304498118}
   allStations: {fileID: 372811998}
-  ID: 0
-  name: GameMashine
+  ID: 1
+  name: ps
   moneyText: {fileID: 969752274}
 --- !u!65 &304498121
 BoxCollider:
@@ -6256,8 +6256,8 @@ MonoBehaviour:
   openStation: {fileID: 1153078542}
   CloseCanvas: {fileID: 579886542}
   allStations: {fileID: 372811998}
-  ID: 0
-  name: GameMashine
+  ID: 2
+  name: ps
   moneyText: {fileID: 1621563085}
 --- !u!65 &579886545
 BoxCollider:
@@ -8180,7 +8180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1755613237108647981, guid: 07a7bd0864138004b8b70a909d21ed11, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8133862319787916726, guid: 07a7bd0864138004b8b70a909d21ed11, type: 3}
       propertyPath: exit
@@ -10869,7 +10869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1755613237108647981, guid: 07a7bd0864138004b8b70a909d21ed11, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8133862319787916726, guid: 07a7bd0864138004b8b70a909d21ed11, type: 3}
       propertyPath: exit
@@ -11731,8 +11731,8 @@ MonoBehaviour:
   openStation: {fileID: 1978917901}
   CloseCanvas: {fileID: 1064874695}
   allStations: {fileID: 372811998}
-  ID: 0
-  name: GameMashine
+  ID: 3
+  name: ps
   moneyText: {fileID: 1602058768}
 --- !u!65 &1064874698
 BoxCollider:
@@ -13372,7 +13372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1755613237108647981, guid: 07a7bd0864138004b8b70a909d21ed11, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8133862319787916726, guid: 07a7bd0864138004b8b70a909d21ed11, type: 3}
       propertyPath: exit
@@ -14118,6 +14118,38 @@ PrefabInstance:
       propertyPath: upgradePctext
       value: 
       objectReference: {fileID: 388133807}
+    - target: {fileID: 449748088, guid: f836f2847e43fcb419cdc9505dd71c82, type: 3}
+      propertyPath: m_Size.y
+      value: 2.5468283
+      objectReference: {fileID: 0}
+    - target: {fileID: 449748088, guid: f836f2847e43fcb419cdc9505dd71c82, type: 3}
+      propertyPath: m_Center.x
+      value: -0.07192591
+      objectReference: {fileID: 0}
+    - target: {fileID: 449748088, guid: f836f2847e43fcb419cdc9505dd71c82, type: 3}
+      propertyPath: m_Center.y
+      value: 0.053245947
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846872097897461263, guid: f836f2847e43fcb419cdc9505dd71c82, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6614655
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846872097897461263, guid: f836f2847e43fcb419cdc9505dd71c82, type: 3}
+      propertyPath: m_Size.z
+      value: 2.7055407
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846872097897461263, guid: f836f2847e43fcb419cdc9505dd71c82, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0706468
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846872097897461263, guid: f836f2847e43fcb419cdc9505dd71c82, type: 3}
+      propertyPath: m_Center.y
+      value: 0.1609138
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846872097897461263, guid: f836f2847e43fcb419cdc9505dd71c82, type: 3}
+      propertyPath: m_Center.z
+      value: 0.43257722
+      objectReference: {fileID: 0}
     - target: {fileID: 8226423366896256541, guid: f836f2847e43fcb419cdc9505dd71c82, type: 3}
       propertyPath: m_Name
       value: Station
@@ -14183,7 +14215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1316498680
 Transform:
   m_ObjectHideFlags: 0
@@ -14957,6 +14989,7 @@ MonoBehaviour:
   - {fileID: 1657967916}
   - {fileID: 2013966884}
   - {fileID: 1763039805}
+  - {fileID: 496393287}
   foods: []
   CustomerSpawn: {fileID: 2145419537197250957, guid: bcbc95de303878c478ca556206042291, type: 3}
   CustomerSpawnLocation: {fileID: 1413620137}
@@ -15023,7 +15056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1670484414386098110, guid: 305525c7cfdd746459ad23c6b3153eb2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.7088705
+      value: 0.62416047
       objectReference: {fileID: 0}
     - target: {fileID: 1670484414386098110, guid: 305525c7cfdd746459ad23c6b3153eb2, type: 3}
       propertyPath: m_LocalScale.z
@@ -15035,7 +15068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1670484414386098110, guid: 305525c7cfdd746459ad23c6b3153eb2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.956
+      value: 0.9983
       objectReference: {fileID: 0}
     - target: {fileID: 1670484414386098110, guid: 305525c7cfdd746459ad23c6b3153eb2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18707,7 +18740,7 @@ MonoBehaviour:
   CloseCanvas: {fileID: 1805489855}
   allStations: {fileID: 372811998}
   ID: 0
-  name: GameMashine
+  name: ps
   moneyText: {fileID: 2012279964}
 --- !u!65 &1805489858
 BoxCollider:
@@ -20995,6 +21028,7 @@ MonoBehaviour:
   - {fileID: 1657967916}
   - {fileID: 2013966884}
   - {fileID: 1763039805}
+  - {fileID: 496393287}
   character: {fileID: 549303961}
   Station: {fileID: 472848002}
   canteen: {fileID: 123515133}

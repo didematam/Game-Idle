@@ -88,9 +88,7 @@ public class Customers : MonoBehaviour
             yield return null;
         }
 
-        }
-        if (!currentStation.gameMashine)
-        {
+        
             
 
 
@@ -185,10 +183,7 @@ public class Customers : MonoBehaviour
             }
            
             ProgressBarBroke.SetActive(false);
-            }
-            if (!currentStation.gameMashine)
-            {
-
+         
 
 
                 if (currentStation.putFood.putHamburger.Count != 0 && a == 1)
@@ -242,6 +237,13 @@ public class Customers : MonoBehaviour
 
 
                     currentStation.money.AddMoney((int)maxtime * 7);
+                }
+                else if(currentStation.ps)
+                {
+                    currentStation.Gladness.addgladness(5);
+
+
+                    currentStation.money.AddMoney((int)maxtime * 10);
                 }
                 else
                 {

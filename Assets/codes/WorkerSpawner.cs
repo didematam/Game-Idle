@@ -23,18 +23,16 @@ public class WorkerSpawner : MonoBehaviour
     public TextMeshProUGUI SpeedText;
     public float speed = 0.1f;
 
-    void Start()
+    void Awake()
     {
         WorkerSpawns = new List<Worker>();
-        Worker = 5 - WorkerSpawns.Count();
-        remainingWorker.text = Worker.ToString();
     }
 
-    public bool addWorker(bool isload)
+    public bool addWorker(bool isload,float money)
 
     {
 
-        if (Station.character.currentMoney >= 1000 || isload )
+        if (Station.character.currentMoney >= money || isload )
         {
 
             if (WorkerSpawns.Count <= 5)
@@ -49,9 +47,7 @@ public class WorkerSpawner : MonoBehaviour
                     worker.carrylimit = WorkerSpawns.First().carrylimit;
                 }
                 WorkerSpawns.Add(worker);
-                if(!isload) Station.character.currentMoney -= 1000;
-                Worker = 5 - WorkerSpawns.Count();
-                remainingWorker.text = Worker.ToString();
+                if(!isload) Station.character.currentMoney -= money;
 
                 return true;
 

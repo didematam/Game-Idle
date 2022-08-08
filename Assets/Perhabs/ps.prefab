@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &44360235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 44360236}
+  m_Layer: 0
+  m_Name: AngryWorker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &44360236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44360235}
+  m_LocalRotation: {x: 0.000000007109612, y: -0.004283935, z: -0.0000000070489605, w: 0.9999908}
+  m_LocalPosition: {x: -3.85, y: -0.06, z: 2.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1648716427741313602}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &207662880
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +123,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1648716427741313602}
   m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1497924618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1497924619}
+  m_Layer: 0
+  m_Name: AngryWorkerLook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1497924619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497924618}
+  m_LocalRotation: {x: 0.000000007109612, y: -0.004283935, z: -0.0000000070489605, w: 0.9999908}
+  m_LocalPosition: {x: -2.33, y: 0.06, z: 1.21}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1648716427741313602}
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2082024804
 GameObject:
@@ -225,6 +287,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &377091061781595273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7657813867892189121}
+  m_Layer: 0
+  m_Name: workerPutCD
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7657813867892189121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377091061781595273}
+  m_LocalRotation: {x: 0.000000007109612, y: -0.004283935, z: -0.0000000070489605, w: 0.9999908}
+  m_LocalPosition: {x: -3.026, y: 0, z: 2.041}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1648716427741313602}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &816062380428861507
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,8 +731,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.344942, y: 2.7778819, z: 3.4951975}
-  m_Center: {x: -0.010539286, y: 0.16091385, z: 0.036094453}
+  m_Size: {x: 3.0115547, y: 2.7778819, z: 4.9748883}
+  m_Center: {x: -0.8457488, y: 0.16091385, z: 0.7835031}
 --- !u!114 &255467423856325150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,7 +750,7 @@ MonoBehaviour:
   spawnObject: {fileID: 4266766688687805187, guid: fc5f64ad9654c09479f3e3ec75ac5a08, type: 3}
   spawnLocation: {fileID: 5811067439775234389}
   putLimit: 5
-  WorkerPutCD: {fileID: 0}
+  WorkerPutCD: {fileID: 7657813867892189121}
   spacing: 0.05
   ID: 13
   Name: putCD
@@ -874,6 +967,9 @@ Transform:
   - {fileID: 2082024805}
   - {fileID: 443504165}
   - {fileID: 3788366999713398361}
+  - {fileID: 7657813867892189121}
+  - {fileID: 44360236}
+  - {fileID: 1497924619}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -892,9 +988,12 @@ MonoBehaviour:
   Gladness: {fileID: 0}
   movePositionTransform: {fileID: 7263902742473317700}
   exit: {fileID: 0}
+  ContiniusExit: {fileID: 0}
   Monitor: {fileID: 7747168222116798288}
   PCReapairPos: {fileID: 443504165}
   PCPos: {fileID: 2082024805}
+  AngryWorker: {fileID: 44360236}
+  AngryWorkerLook: {fileID: 1497924619}
   newJoystick: {fileID: 318676050}
   oldJoystick: {fileID: 207662881}
   joystick: {fileID: 3933742152565810359}
@@ -925,6 +1024,7 @@ MonoBehaviour:
   CanBroke: 1
   isBroke: 0
   gameMashine: 0
+  ps: 0
 --- !u!208 &3234589623011426616
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -1195,6 +1295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: uploads_files_2345951_Old+sofa
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5df85603429d6e94d81f1e208cf5e2a8, type: 3}
+      propertyPath: m_TagString
+      value: BreakWorker
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5df85603429d6e94d81f1e208cf5e2a8, type: 3}
 --- !u!4 &3744794361751515826 stripped
@@ -1215,11 +1319,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4085888618804406280}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.1944685, y: 0.92269516, z: 0.78733575}
-  m_Center: {x: -0.003107309, y: 0.013969559, z: 0.39366797}
+  m_Size: {x: 2.6997864, y: 1.2388186, z: 0.78733575}
+  m_Center: {x: 0.02095513, y: 0.0465854, z: 0.39366797}
 --- !u!1001 &4180176928306247457
 PrefabInstance:
   m_ObjectHideFlags: 0

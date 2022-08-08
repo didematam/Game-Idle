@@ -9,9 +9,12 @@ public class Station : MonoBehaviour
    public Gladness Gladness;
     public Transform movePositionTransform;
     public Transform exit;
+   
     public Transform Monitor;
     public Transform PCReapairPos;
     public Transform PCPos;
+    public Transform AngryWorker;
+    public Transform AngryWorkerLook;
     public Transform newJoystick;
     public Transform oldJoystick;
     public GameObject joystick;
@@ -70,17 +73,8 @@ public class Station : MonoBehaviour
    
     public void upgradestation()
     {
-        if (WorkerSpawner.character.currentMoney >= Stationmoney && CanBroke)
-        {
-            WorkerSpawner.character.currentMoney -= Stationmoney;
-            Stationmoney *= 2;
-          
-            currLevel =2;
-            setLevel();
-
-        }
-
-        upgradePctext.text = Stationmoney.ToString();
+        currLevel = 2;
+        setLevel();
     }
 
     void Start()

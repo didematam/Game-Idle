@@ -371,13 +371,18 @@ public class CharacterCD : MonoBehaviour
     public void angry()
     {
         charactermove.canMove = true;
+        if (currentBrokenStation.joystick != null)
+        {
+            currentBrokenStation.joystick.transform.position = currentBrokenStation.oldJoystick.transform.position;
+
+        }
         currentBrokenStation.breakWorker.animator.SetTrigger("StandUp");
         worker.brokeImage.SetActive(false);
         currentBrokenStation.breakWorker.breakElapsed = 0;
         currentBrokenStation.breakWorker.selectedStationBreak = null;
         currentBrokenStation.breakWorker.brokeImage.SetActive(false);
         currentBrokenStation.breakWorker.agent.SetDestination(currentBrokenStation.breakWorker.WorkerSpawner.waiting.position);
-        currentBrokenStation.breakWorker = null;
+        currentBrokenStation.breakWorker = null;      
         currentBrokenStation = null;
 
 
@@ -464,9 +469,10 @@ public class CharacterCD : MonoBehaviour
         {
             currentBrokenStation.isBroke = false;
             currentBrokenStation.smokeBreak.SetActive(false);
-            transform.position = currentBrokenStation.PCReapairPos.position;
-            gameObject.transform.LookAt(currentBrokenStation.PCPos.position);
-        }
+            transform.position = currentBrokenStation.AngryWorker.position;
+            gameObject.transform.LookAt(currentBrokenStation.AngryWorkerLook.position);
+           
+}
 
     }
     public void saveData()

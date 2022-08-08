@@ -31,6 +31,37 @@ Transform:
   m_Father: {fileID: 8804833732460560811}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &350795642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 350795643}
+  m_Layer: 0
+  m_Name: AngryWorkerLook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &350795643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350795642}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.57, y: -0.09, z: 0.42}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8804833732460560811}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &449748085
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +263,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8804833732460560811}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1499109385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1499109386}
+  m_Layer: 0
+  m_Name: AngryWorker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1499109386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499109385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.89, y: 0, z: -0.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8804833732460560811}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1706732789
 GameObject:
@@ -996,6 +1058,8 @@ Transform:
   - {fileID: 1815182668}
   - {fileID: 1018263707}
   - {fileID: 114567671}
+  - {fileID: 1499109386}
+  - {fileID: 350795643}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1030,9 +1094,12 @@ MonoBehaviour:
   Gladness: {fileID: 0}
   movePositionTransform: {fileID: 7475229822308554679}
   exit: {fileID: 0}
+  ContiniusExit: {fileID: 0}
   Monitor: {fileID: 6099924332151577695}
   PCReapairPos: {fileID: 1018263707}
   PCPos: {fileID: 114567671}
+  AngryWorker: {fileID: 1499109386}
+  AngryWorkerLook: {fileID: 350795643}
   newJoystick: {fileID: 0}
   oldJoystick: {fileID: 0}
   joystick: {fileID: 0}
@@ -1063,6 +1130,7 @@ MonoBehaviour:
   CanBroke: 1
   isBroke: 0
   gameMashine: 0
+  ps: 0
 --- !u!95 &1613377856
 Animator:
   serializedVersion: 4

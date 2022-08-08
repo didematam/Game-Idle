@@ -150,6 +150,10 @@ public class Worker : MonoBehaviour
                 selectedStationBreak.smokeBreak.SetActive(false);
                 brokeImage.SetActive(true);
                 animator.SetBool("sit", true);
+                if (selectedStationBreak.joystick != null)
+                {
+                    selectedStationBreak.joystick.transform.position = selectedStationBreak.newJoystick.transform.position;
+                }
                 selectedStationBreak.openPCScreen.SetActive(true);
                 selectedStationBreak.currentWorker = this;
             }
@@ -167,7 +171,7 @@ public class Worker : MonoBehaviour
             }
             if (selectedStationBreak != null)
             {
-                agent.destination = selectedStationBreak.movePositionTransform.position;
+                agent.destination = selectedStationBreak.movePositionTransform.position;                
                 selectedStationBreak.breakWorker = this;
                 return;
             }
@@ -181,7 +185,11 @@ public class Worker : MonoBehaviour
 
         if (!brokeImage.activeInHierarchy)
         {
-
+            if(selectedStation==null)
+            {
+                agent.destination = WorkerSpawner.waiting.position;
+            }
+           
             if (selectedStation == null)
             {
                 selectedStation = WorkerSpawner.Stations.Where(x => x.gameObject.activeInHierarchy && x.putcd.putCD.Count == 0 && x.currentWorker == null).OrderBy(x => Guid.NewGuid()).FirstOrDefault();

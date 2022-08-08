@@ -21,7 +21,6 @@ public class PutCD : MonoBehaviour
     void Start()
     {
         loadData();
-        putCD = new List<GameObject>();
     }
         
 

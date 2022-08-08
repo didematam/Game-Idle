@@ -20,6 +20,10 @@ public class Buttons : MonoBehaviour
     public string ID;
     public string Name;
 
+    public int hireWorkerMoney=400;
+    public Button hireWorkerButton;
+    public TextMeshProUGUI hireWorkerMoneytext;
+    public TextMeshProUGUI remainingWorker;
     public int hireWorkerCount=0;
     public int upgradeSpeedCount = 0;
     public int upgradeCapacityCount=0; 
@@ -32,7 +36,7 @@ public class Buttons : MonoBehaviour
     {
         Upgrade.SetActive(false);
         loadData();
-
+        hireWorkerMoneytext.text = hireWorkerMoney.ToString();
     }
     public void exit()
     {
@@ -46,8 +50,18 @@ public class Buttons : MonoBehaviour
         var Workerspawner = Workerspawners.GetComponent<WorkerSpawner>();
         if (Workerspawner.WorkerSpawns.Count < 5)
         {
-            if(Workerspawner.addWorker(isload))
+            if(Workerspawner.addWorker(isload,hireWorkerMoney))
+            {
                 hireWorkerCount++;
+                hireWorkerMoney *= 2;
+                hireWorkerMoneytext.text = hireWorkerMoney.ToString();
+                if(Workerspawner.WorkerSpawns.Count == 5)
+                {
+                    hireWorkerButton.interactable = false;
+                }
+                var Worker = 5 - Workerspawner.WorkerSpawns.Count;
+                remainingWorker.text = Worker.ToString();
+            }
         }
     }
     public void upgradeCpacity()
@@ -93,14 +107,24 @@ public class Buttons : MonoBehaviour
         if (stations.currLevel != 2)
         {
             upgradepcCount++;
-            foreach(var station in allstation.Stations)
+            upgradeStations();
+            foreach (var station in allstation.Stations)
             {
                 station.upgradestation();
             }
             upgradePCLock.SetActive(true);
         }
     }
-   
+    void upgradeStations()
+    {
+        var Workerspawner = Workerspawners.GetComponent<WorkerSpawner>();
+
+        if (Workerspawner.character.currentMoney >= 1000)
+        {
+            Workerspawner.character.currentMoney -= 1000;
+
+        }
+    }
     void Update()
     {
         saveData();

@@ -18,15 +18,15 @@ public class CustomerSpawner : MonoBehaviour
     void Start()
     {
 
-        CustomerSpawns=new List<GameObject>();
+        CustomerSpawns = new List<GameObject>();
 
-       openPCScreen.SetActive(false);
+        openPCScreen.SetActive(false);
     }
 
 
     public void AddCustomerSpawns()
     {
-        var selectedStation = Stations.Where(x => x.currentCustomer == null && x.gameObject.activeInHierarchy && x.currentWorker ==null && !x.isBroke).ToList();
+        var selectedStation = Stations.Where(x => x.currentCustomer == null && x.gameObject.activeInHierarchy && x.breakWorker == null && !x.isBroke).ToList();
         if(selectedStation.Count>0)
         {
             var x = Instantiate(CustomerSpawn, CustomerSpawnLocation.transform);

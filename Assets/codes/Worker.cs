@@ -183,9 +183,9 @@ public class Worker : MonoBehaviour
             breakElapsed += Time.deltaTime;
         }
 
-        if (!brokeImage.activeInHierarchy)
+        if (!brokeImage.activeInHierarchy )
         {
-            if(selectedStation==null)
+            if (selectedStation==null)
             {
                 agent.destination = WorkerSpawner.waiting.position;
             }

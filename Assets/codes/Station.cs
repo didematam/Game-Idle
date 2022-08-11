@@ -83,7 +83,7 @@ public class Station : MonoBehaviour
     {
        
         currLevel = 1;
-        maxTime = Random.Range(10, 100);
+        maxTime = Random.Range(100, 200);
         if(!gameMashine)
         {
 

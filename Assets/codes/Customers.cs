@@ -130,7 +130,8 @@ public class Customers : MonoBehaviour
                 }
                 else
                 {
-                    a = Random.Range(1, 1);
+
+                    a = Random.Range(0, 1);
                     if (a == 1)
                     {
 
@@ -260,6 +261,7 @@ public class Customers : MonoBehaviour
                 
              
                 animator.SetBool(currentStation.CustomerAnimasion, false);
+                animator.SetBool("happy", true);
                 currentStation.openPCScreen.SetActive(false);
                 currentStation.OpenScreen.SetActive(false);
                 if (currentStation.joystick != null)
@@ -345,6 +347,7 @@ public class Customers : MonoBehaviour
                     currentStation.Gladness.RemoveGladness(5);
                     AngryFace.SetActive(true);
                     animator.SetBool(currentStation.CustomerAnimasion, false);
+                    animator.SetBool("sad", true);
                     if (currentStation.joystick != null)
                     {
                         currentStation.joystick.transform.position = currentStation.oldJoystick.transform.position;
@@ -428,6 +431,7 @@ public class Customers : MonoBehaviour
                     currentStation.Gladness.RemoveGladness(5);
                     AngryFace.SetActive(true);
                     animator.SetBool(currentStation.CustomerAnimasion, false);
+                    animator.SetBool("sad", true);
                     currentStation.openPCScreen.SetActive(false);
                     currentStation.OpenScreen.SetActive(false);
                     if (currentStation.joystick != null)
@@ -569,5 +573,9 @@ public class Customers : MonoBehaviour
         Cola.transform.LookAt(Camera.main.transform.position);
         ProgressBarFoods.transform.LookAt(Camera.main.transform.position);
         ProgressBarBroke.transform.LookAt(Camera.main.transform.position);
+    }
+    public void çaðýr()
+    {
+        StartCoroutine(progressBarFood());
     }
 }

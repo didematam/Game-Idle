@@ -66,7 +66,7 @@ public class canteen : MonoBehaviour
                 opencanteen2.SetActive(true);
 
                 CloseCanvas.SetActive(false);
-                FirstCustomer();
+              
 
 
 
@@ -79,30 +79,8 @@ public class canteen : MonoBehaviour
 
     }
   
-    public void FirstCustomer()
-    {
-        bool isFirstCustomer = true;
-        if (isFirstCustomer && customer!=null)
-        {
-            var x =customer.customerspawner.food.GetRandomFood();
-            if(x==0)
-            {
-                customer.Hamburger.SetActive(true);
-                customer.Cola.SetActive(false);
-            }
-            else if (x == 1)
-            {
-                customer.Hamburger.SetActive(false);
-                customer.Cola.SetActive(true);
-                customer.çaðýr();
-
-
-
-
-            }
-        }
-        isFirstCustomer = false;
-    }
+    
+    
     
     public void openCanteen(bool isload)
     {

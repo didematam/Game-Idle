@@ -131,8 +131,8 @@ public class Customers : MonoBehaviour
                 else
                 {
 
-                    a = Random.Range(0, 1);
-                    if (a == 1)
+                    a = Random.Range(1, 3);
+                    if (a == 2 || a==3)
                     {
 
                         x = customerspawner.food.GetRandomFood();
